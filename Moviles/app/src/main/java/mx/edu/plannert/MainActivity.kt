@@ -8,6 +8,7 @@ import android.widget.TextView
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
+        setTheme(R.style.Theme_Plannert)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
