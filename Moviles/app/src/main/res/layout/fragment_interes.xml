@@ -104,7 +104,8 @@
         android:layout_gravity="center"
         android:numColumns="3"
         android:verticalSpacing="10dp"
-        android:horizontalSpacing="10dp"
+        android:horizontalSpacing="2dp"
         android:layout_marginTop="18dp"
-        android:paddingHorizontal="6dp"/>
+        android:layout_marginLeft="5dp"
+        />
 </LinearLayout>

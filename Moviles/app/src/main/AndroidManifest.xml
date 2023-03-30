@@ -12,6 +12,12 @@
         android:theme="@style/Theme.Plannert"
         tools:targetApi="31">
         <activity
+            android:name=".OpcionesMenu"
+            android:exported="false" />
+        <activity
+            android:name=".menu"
+            android:exported="false" />
+        <activity
             android:name=".Introductorio"
             android:exported="false" />
         <activity
@@ -19,8 +25,8 @@
             android:exported="false" />
         <activity
             android:name=".MainActivity"
-            android:theme="@style/splashTheme"
-            android:exported="true">
+            android:exported="true"
+            android:theme="@style/splashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

@@ -1,6 +1,7 @@
 package mx.edu.plannert
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -112,6 +113,11 @@ class Introductorio : AppCompatActivity() {
                 Rbtn3.setBackgroundResource(R.drawable.circuloseleccionado)
 
             myLinearLayout.setBackgroundResource(R.drawable.fondomorado)
+        }
+
+        Rbtn4.setOnClickListener{
+            val intent = Intent(this, menu::class.java)
+            startActivity(intent)
         }
 
 
