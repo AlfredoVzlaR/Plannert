@@ -10,4 +10,7 @@
     <color name="transparente">#22000000</color>
     <color name="gris">#C2C2C2</color>
     <color name="sesion">#C17B8C</color>
+    <color name="transparent">#00000000</color>
+    <color name="amarillo">#E8A31E</color>
+    <color name="morado">#38335A</color>
 </resources>

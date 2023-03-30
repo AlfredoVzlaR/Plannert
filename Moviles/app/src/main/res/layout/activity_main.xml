@@ -53,6 +53,7 @@
         android:shadowDx="100" android:shadowDy="100" android:shadowRadius="100"
         />
     <Button
+        android:id="@+id/btnIniciarSesion"
         android:layout_width="300dp"
         android:layout_height="50dp"
         android:layout_gravity="center_horizontal"
