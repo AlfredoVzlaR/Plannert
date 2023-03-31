@@ -14,7 +14,7 @@ class Bienvenida2 : AppCompatActivity() {
         val later : TextView = findViewById(R.id.tvMasTarde)
 
         boton.setOnClickListener{
-            val intent = Intent(this,Registro::class.java)
+            val intent = Intent(this,CrearLista::class.java)
             startActivity(intent)
         }
         later.setOnClickListener{
