@@ -12,7 +12,13 @@
         android:theme="@style/Theme.Plannert"
         tools:targetApi="31">
         <activity
-            android:name=".Bienvenida2"
+            android:name=".Nosotros"
+            android:exported="false" />
+        <activity
+            android:name=".Ayuda"
+            android:exported="false" />
+        <activity
+            android:name=".NecesitoAyuda"
             android:exported="false" />
         <activity
             android:name=".OpcionesMenu"

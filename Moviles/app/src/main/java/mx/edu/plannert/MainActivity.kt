@@ -14,6 +14,7 @@ class MainActivity : AppCompatActivity() {
 
         val registro: TextView = findViewById(R.id.tv_registrate)
         var botonIS:Button=findViewById(R.id.btnIniciarSesion)
+        val necesitoAyuda : TextView = findViewById(R.id.necesitoAyuda)
 
         registro.setOnClickListener{
             val intent = Intent(this,Registro::class.java)
@@ -22,6 +23,11 @@ class MainActivity : AppCompatActivity() {
 
         botonIS.setOnClickListener{
             val intent = Intent(this,Introductorio::class.java)
+            startActivity(intent)
+        }
+
+        necesitoAyuda.setOnClickListener{
+            val intent = Intent(this,NecesitoAyuda::class.java)
             startActivity(intent)
         }
     }
