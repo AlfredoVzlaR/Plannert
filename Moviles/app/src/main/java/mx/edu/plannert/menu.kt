@@ -25,12 +25,12 @@ class menu : AppCompatActivity() {
         }
 
         opcionAyuda.setOnClickListener{
-            val intent = Intent(this, Ayuda::class.java)
+            val intent = Intent(this, us::class.java)
             startActivity(intent)
         }
 
         opcionNosotros.setOnClickListener{
-            val intent = Intent(this, Nosotros::class.java)
+            val intent = Intent(this, help::class.java)
             startActivity(intent)
         }
 

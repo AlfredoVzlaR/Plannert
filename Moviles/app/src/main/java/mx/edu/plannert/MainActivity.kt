@@ -27,7 +27,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         necesitoAyuda.setOnClickListener{
-            val intent = Intent(this,NecesitoAyuda::class.java)
+            val intent = Intent(this,help::class.java)
             startActivity(intent)
         }
     }
