@@ -1,5 +1,6 @@
 package mx.edu.plannert
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -74,6 +75,13 @@ class CrearLista : AppCompatActivity() {
 
                 siguiente.setText("Ir a inicio")
                 titulo.setText("¡Felicidades!")
+
+                if(siguiente.text.equals("Ir a inicio")){
+                    siguiente.setOnClickListener{
+                        val intent = Intent(this,Inicio::class.java)
+                        startActivity(intent)
+                    }
+                }
 
 
             }
