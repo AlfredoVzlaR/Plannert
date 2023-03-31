@@ -61,6 +61,21 @@ class Introductorio : AppCompatActivity() {
                 Rbtn1.setBackgroundResource(R.drawable.circulo)
                 Rbtn2.setBackgroundResource(R.drawable.circulo)
                 Rbtn3.setBackgroundResource(R.drawable.circuloseleccionado)
+            }else if(fragment is Interes){
+                actual="plataformas"
+                val imagenes = listOf(R.drawable.pluto, R.drawable.netflix, R.drawable.primevideo,R.drawable.cuevana,
+                    R.drawable.hbo,R.drawable.diney,R.drawable.star,R.drawable.tubi,R.drawable.vix,
+                    R.drawable.appletv,R.drawable.paramount,R.drawable.hulu)
+                val interes2=Interes.newInstance(imagenes,"Plataformas")
+
+
+
+                supportFragmentManager.beginTransaction()
+                    .replace(R.id.fragmentContainerView, elegirAvatar)
+                    .commit()
+                Rbtn1.setBackgroundResource(R.drawable.circulo)
+                Rbtn2.setBackgroundResource(R.drawable.circulo)
+                Rbtn3.setBackgroundResource(R.drawable.circuloseleccionado)
             }
             myLinearLayout.setBackgroundResource(R.drawable.fondomorado)
 
@@ -123,5 +138,9 @@ class Introductorio : AppCompatActivity() {
 
     }
 
+
+}
+
+private fun FragmentTransaction.replace(fragmentContainerView: Int, elegirAvatar: elegirAvatar.Companion): FragmentTransaction {
 
 }
