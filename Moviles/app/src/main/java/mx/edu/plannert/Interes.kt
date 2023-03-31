@@ -53,7 +53,7 @@ class Interes : Fragment() {
       //  return inflater.inflate(R.layout.fragment_interes, container, false)
         val view = inflater.inflate(R.layout.fragment_interes, container, false)
         val gridView = view.findViewById<GridView>(R.id.grid_interes)
-        val subtitulo= view.findViewById<TextView>(R.id.txtSubtitulo)
+        val subtitulo= view.findViewById<TextView>(R.id.txtSubtiulo)
         val mensaje= view.findViewById<TextView>(R.id.txtMensaje)
 
         subtitulo.setText(sub)

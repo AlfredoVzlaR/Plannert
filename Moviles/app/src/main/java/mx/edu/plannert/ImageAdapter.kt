@@ -18,8 +18,6 @@ class ImageAdapter(private val context: Context, private val images: List<Int>) 
         imageView.scaleType = ImageView.ScaleType.CENTER_CROP
         imageView.layoutParams = AbsListView.LayoutParams(365, 490)
 
-
-
         return imageView
 
 
