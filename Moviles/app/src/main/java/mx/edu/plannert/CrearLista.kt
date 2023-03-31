@@ -37,20 +37,7 @@ class CrearLista : AppCompatActivity() {
                 btn1.setBackgroundResource(R.drawable.circulo)
 
             }else if(fragment is Categorias) {
-                val imagenes = listOf(
-                    R.drawable.pluto,
-                    R.drawable.netflix,
-                    R.drawable.primevideo,
-                    R.drawable.cuevana,
-                    R.drawable.hbo,
-                    R.drawable.diney,
-                    R.drawable.star,
-                    R.drawable.tubi,
-                    R.drawable.vix,
-                    R.drawable.appletv,
-                    R.drawable.paramount,
-                    R.drawable.hulu
-                )
+                val imagenes = listOf(R.drawable.prodigy, R.drawable.alien, R.drawable.ironman,R.drawable.shanchi,R.drawable.quantumania,R.drawable.lightyear,R.drawable.shrek,R.drawable.elvis,R.drawable.fightclub,R.drawable.tres,R.drawable.blackswan,R.drawable.hollywood)
                val titlesd = Interes.newInstance(imagenes,"Romance",true)
                 titulo.setText("Escoge los titulos de tu interés ")
                 supportFragmentManager.beginTransaction()
@@ -118,20 +105,7 @@ class CrearLista : AppCompatActivity() {
             }
 
             btn3.setOnClickListener{
-                val imagenes = listOf(
-                    R.drawable.pluto,
-                    R.drawable.netflix,
-                    R.drawable.primevideo,
-                    R.drawable.cuevana,
-                    R.drawable.hbo,
-                    R.drawable.diney,
-                    R.drawable.star,
-                    R.drawable.tubi,
-                    R.drawable.vix,
-                    R.drawable.appletv,
-                    R.drawable.paramount,
-                    R.drawable.hulu
-                )
+                val imagenes = listOf(R.drawable.prodigy, R.drawable.alien, R.drawable.ironman,R.drawable.shanchi,R.drawable.quantumania,R.drawable.lightyear,R.drawable.shrek,R.drawable.elvis,R.drawable.fightclub,R.drawable.tres,R.drawable.blackswan,R.drawable.hollywood)
                 val titlesd = Interes.newInstance(imagenes,"Romance",true)
                 titulo.setText("Escoge los titulos de tu interés ")
                 siguiente.setText("Siguiente")
