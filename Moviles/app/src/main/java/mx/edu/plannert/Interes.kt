@@ -50,13 +50,30 @@ class Interes : Fragment() {
         //return inflater.inflate(R.layout.fragment_interes, container, false)
         val imagenes = arguments?.getIntegerArrayList("imagenes")
         val sub = arguments?.getString("subtitulo")
+        val ocultar= arguments?.getBoolean("ocultar")
       //  return inflater.inflate(R.layout.fragment_interes, container, false)
         val view = inflater.inflate(R.layout.fragment_interes, container, false)
         val gridView = view.findViewById<GridView>(R.id.grid_interes)
         val subtitulo= view.findViewById<TextView>(R.id.txtSubtiulo)
+        val boton1= view.findViewById<Button>(R.id.btn1)
+        val boton2= view.findViewById<Button>(R.id.btn2)
+        val boton3= view.findViewById<Button>(R.id.btn3)
+        val boton4= view.findViewById<Button>(R.id.btn4)
         val mensaje= view.findViewById<TextView>(R.id.txtMensaje)
 
         subtitulo.setText(sub)
+        if(ocultar!=null)
+        {
+            if(ocultar==true){
+                boton1.visibility=View.INVISIBLE
+                boton2.visibility=View.INVISIBLE
+                boton3.visibility=View.INVISIBLE
+                boton4.visibility=View.INVISIBLE
+                mensaje.visibility=View.INVISIBLE
+
+            }
+        }
+
 
         if(sub=="Peliculas"){
             mensaje.setText("Selecciona 5 intereses")
@@ -103,6 +120,16 @@ class Interes : Fragment() {
             val args = Bundle()
             args.putIntegerArrayList("imagenes", ArrayList(imagenes))
             args.putString("subtitulo",subtitulo)
+            fragment.arguments = args
+            return fragment
+        }
+
+        fun newInstance(imagenes: List<Int>,subtitulo:String,ocultar: Boolean): Interes {
+            val fragment = Interes()
+            val args = Bundle()
+            args.putIntegerArrayList("imagenes", ArrayList(imagenes))
+            args.putString("subtitulo",subtitulo)
+            args.putBoolean("ocultar",ocultar)
             fragment.arguments = args
             return fragment
         }

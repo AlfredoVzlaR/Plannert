@@ -120,6 +120,11 @@ class Introductorio : AppCompatActivity() {
             startActivity(intent)
         }
 
+        Rbtn5.setOnClickListener{
+            val intent = Intent(this, InicioListas::class.java)
+            startActivity(intent)
+        }
+
 
     }
 

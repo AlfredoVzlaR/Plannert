@@ -14,5 +14,8 @@
     <color name="transparent">#00000000</color>
     <color name="amarillo">#E8A31E</color>
     <color name="morado">#38335A</color>
+    <color name="rojo">#A8324E</color>
+    <color name="azul">#2583C5</color>
+    <color name="verde">#84A45C</color>
 
 </resources>
