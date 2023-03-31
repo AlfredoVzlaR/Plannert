@@ -5,6 +5,7 @@ import android.content.Intent
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.RadioButton
 import android.widget.TextView
@@ -24,6 +25,7 @@ class Introductorio : AppCompatActivity() {
         var Rbtn3:RadioButton=findViewById(R.id.Rbtn3)
         var Rbtn4:RadioButton=findViewById(R.id.Rbtn4)
         var Rbtn5:RadioButton=findViewById(R.id.Rbtn5)
+        var tarde: TextView = findViewById(R.id.tv_siguientePaso)
         var actual: String? =null
         Rbtn1.setBackgroundResource(R.drawable.circuloseleccionado)
 
@@ -46,6 +48,7 @@ class Introductorio : AppCompatActivity() {
                 Rbtn3.setBackgroundResource(R.drawable.circulo)
                 Rbtn1.setBackgroundResource(R.drawable.circulo)
                 Rbtn4.setBackgroundResource(R.drawable.circulo)
+                Rbtn5.setBackgroundResource(R.drawable.circulo)
 
             }else if(fragment is Interes){
                 actual="plataformas"
@@ -71,6 +74,18 @@ class Introductorio : AppCompatActivity() {
                 Rbtn2.setBackgroundResource(R.drawable.circulo)
                 Rbtn3.setBackgroundResource(R.drawable.circuloseleccionado)
                 Rbtn4.setBackgroundResource(R.drawable.circulo)
+                Rbtn5.setBackgroundResource(R.drawable.circulo)
+            }
+            else if(fragment is Interes){
+                actual="elige un avatar"
+                supportFragmentManager.beginTransaction()
+                    .replace(R.id.fragmentContainerView, elegirAvatar())
+
+                Rbtn1.setBackgroundResource(R.drawable.circulo)
+                Rbtn2.setBackgroundResource(R.drawable.circulo)
+                Rbtn3.setBackgroundResource(R.drawable.circuloseleccionado)
+                Rbtn4.setBackgroundResource(R.drawable.circulo)
+                Rbtn5.setBackgroundResource(R.drawable.circulo)
             }
             myLinearLayout.setBackgroundResource(R.drawable.fondomorado)
 
@@ -87,6 +102,7 @@ class Introductorio : AppCompatActivity() {
             Rbtn2.setBackgroundResource(R.drawable.circulo)
             Rbtn3.setBackgroundResource(R.drawable.circulo)
             Rbtn4.setBackgroundResource(R.drawable.circulo)
+            Rbtn5.setBackgroundResource(R.drawable.circulo)
             myLinearLayout.setBackgroundResource(R.drawable.fondotransparente)
 
 
@@ -102,6 +118,7 @@ class Introductorio : AppCompatActivity() {
                 Rbtn1.setBackgroundResource(R.drawable.circulo)
                 Rbtn3.setBackgroundResource(R.drawable.circulo)
             Rbtn4.setBackgroundResource(R.drawable.circulo)
+            Rbtn5.setBackgroundResource(R.drawable.circulo)
 
                 Rbtn2.setBackgroundResource(R.drawable.circuloseleccionado)
             myLinearLayout.setBackgroundResource(R.drawable.fondomorado)
@@ -124,6 +141,7 @@ class Introductorio : AppCompatActivity() {
             Rbtn2.setBackgroundResource(R.drawable.circulo)
             Rbtn4.setBackgroundResource(R.drawable.circulo)
                 Rbtn3.setBackgroundResource(R.drawable.circuloseleccionado)
+            Rbtn5.setBackgroundResource(R.drawable.circulo)
 
             myLinearLayout.setBackgroundResource(R.drawable.fondomorado)
         }
@@ -136,14 +154,22 @@ class Introductorio : AppCompatActivity() {
             Rbtn2.setBackgroundResource(R.drawable.circulo)
             Rbtn3.setBackgroundResource(R.drawable.circulo)
             Rbtn4.setBackgroundResource(R.drawable.circuloseleccionado)
+            Rbtn5.setBackgroundResource(R.drawable.circulo)
 
             myLinearLayout.setBackgroundResource(R.drawable.fondomorado)
         }
-
         Rbtn5.setOnClickListener{
-            val intent = Intent(this, InicioListas::class.java)
-            startActivity(intent)
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.fragmentContainerView,nombrarAvatar())
+                .commit()
+            Rbtn1.setBackgroundResource(R.drawable.circulo)
+            Rbtn2.setBackgroundResource(R.drawable.circulo)
+            Rbtn3.setBackgroundResource(R.drawable.circulo)
+            Rbtn4.setBackgroundResource(R.drawable.circulo)
+            Rbtn5.setBackgroundResource(R.drawable.circuloseleccionado)
+            myLinearLayout.setBackgroundResource(R.drawable.fondomorado)
         }
+
 
 
     }
