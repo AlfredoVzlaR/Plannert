@@ -33,5 +33,4 @@
         android:background="@drawable/customedittext"
         android:shadowDx="100" android:shadowDy="100" android:shadowRadius="100"
         />
-
 </LinearLayout>

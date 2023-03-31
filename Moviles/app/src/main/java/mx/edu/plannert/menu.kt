@@ -34,6 +34,11 @@ class menu : AppCompatActivity() {
             startActivity(intent)
         }
 
+        opcionConfiguracion.setOnClickListener {
+            val intent = Intent(this, ConfigIdioma::class.java)
+            startActivity(intent)
+        }
+
 
     }
 }
