@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
-        android:layout_gravity="center"
+        android:layout_gravity="center_horizontal"
         android:text="Elige un avatar"
         android:textAlignment="center"
         android:textColor="@color/white"
@@ -23,36 +23,32 @@
         android:id="@+id/avatar1"
         android:layout_width="250dp"
         android:layout_height="150dp"
-        android:layout_gravity="center"
+        android:layout_gravity="center_horizontal"
         android:layout_marginTop="20dp"
-        android:gravity="center_vertical"
         android:background="@drawable/ICONO1"
         />
     <ImageView
         android:id="@+id/avatar2"
         android:layout_width="250dp"
         android:layout_height="150dp"
-        android:layout_gravity="center"
+        android:layout_gravity="center_horizontal"
         android:layout_marginTop="20dp"
-        android:gravity="center_vertical"
         android:background="@drawable/ICONO2"
         />
     <ImageView
         android:id="@+id/avatar3"
         android:layout_width="250dp"
         android:layout_height="150dp"
-        android:layout_gravity="center"
+        android:layout_gravity="center_horizontal"
         android:layout_marginTop="20dp"
-        android:gravity="center_vertical"
         android:background="@drawable/ICONO3"
         />
     <ImageView
         android:id="@+id/avatar4"
         android:layout_width="250dp"
         android:layout_height="150dp"
-        android:layout_gravity="center"
+        android:layout_gravity="center_horizontal"
         android:layout_marginTop="20dp"
-        android:gravity="center_vertical"
         android:background="@drawable/ICONO4"
         />
 
