@@ -127,7 +127,7 @@
 
     <ImageView
         android:layout_alignParentBottom="true"
-
+        android:id="@+id/menuu"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:src="@drawable/barraicon"
