@@ -45,6 +45,7 @@ class Introductorio : AppCompatActivity() {
                 Rbtn2.setBackgroundResource(R.drawable.circuloseleccionado)
                 Rbtn3.setBackgroundResource(R.drawable.circulo)
                 Rbtn1.setBackgroundResource(R.drawable.circulo)
+                Rbtn4.setBackgroundResource(R.drawable.circulo)
 
             }else if(fragment is Interes){
                 actual="plataformas"
@@ -62,20 +63,14 @@ class Introductorio : AppCompatActivity() {
                 Rbtn2.setBackgroundResource(R.drawable.circulo)
                 Rbtn3.setBackgroundResource(R.drawable.circuloseleccionado)
             }else if(fragment is Interes){
-                actual="plataformas"
-                val imagenes = listOf(R.drawable.pluto, R.drawable.netflix, R.drawable.primevideo,R.drawable.cuevana,
-                    R.drawable.hbo,R.drawable.diney,R.drawable.star,R.drawable.tubi,R.drawable.vix,
-                    R.drawable.appletv,R.drawable.paramount,R.drawable.hulu)
-                val interes2=Interes.newInstance(imagenes,"Plataformas")
-
-
-
+                actual="elige un avatar"
                 supportFragmentManager.beginTransaction()
-                    .replace(R.id.fragmentContainerView, elegirAvatar)
+                    .replace(R.id.fragmentContainerView, elegirAvatar())
 
                 Rbtn1.setBackgroundResource(R.drawable.circulo)
                 Rbtn2.setBackgroundResource(R.drawable.circulo)
                 Rbtn3.setBackgroundResource(R.drawable.circuloseleccionado)
+                Rbtn4.setBackgroundResource(R.drawable.circulo)
             }
             myLinearLayout.setBackgroundResource(R.drawable.fondomorado)
 
@@ -91,6 +86,7 @@ class Introductorio : AppCompatActivity() {
             Rbtn1.setBackgroundResource(R.drawable.circuloseleccionado)
             Rbtn2.setBackgroundResource(R.drawable.circulo)
             Rbtn3.setBackgroundResource(R.drawable.circulo)
+            Rbtn4.setBackgroundResource(R.drawable.circulo)
             myLinearLayout.setBackgroundResource(R.drawable.fondotransparente)
 
 
@@ -105,6 +101,7 @@ class Introductorio : AppCompatActivity() {
                     .commit()
                 Rbtn1.setBackgroundResource(R.drawable.circulo)
                 Rbtn3.setBackgroundResource(R.drawable.circulo)
+            Rbtn4.setBackgroundResource(R.drawable.circulo)
 
                 Rbtn2.setBackgroundResource(R.drawable.circuloseleccionado)
             myLinearLayout.setBackgroundResource(R.drawable.fondomorado)
@@ -125,14 +122,22 @@ class Introductorio : AppCompatActivity() {
                     .commit()
                 Rbtn1.setBackgroundResource(R.drawable.circulo)
             Rbtn2.setBackgroundResource(R.drawable.circulo)
+            Rbtn4.setBackgroundResource(R.drawable.circulo)
                 Rbtn3.setBackgroundResource(R.drawable.circuloseleccionado)
 
             myLinearLayout.setBackgroundResource(R.drawable.fondomorado)
         }
 
         Rbtn4.setOnClickListener{
-            val intent = Intent(this, menu::class.java)
-            startActivity(intent)
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.fragmentContainerView, elegirAvatar())
+                .commit()
+            Rbtn1.setBackgroundResource(R.drawable.circulo)
+            Rbtn2.setBackgroundResource(R.drawable.circulo)
+            Rbtn3.setBackgroundResource(R.drawable.circulo)
+            Rbtn4.setBackgroundResource(R.drawable.circuloseleccionado)
+
+            myLinearLayout.setBackgroundResource(R.drawable.fondomorado)
         }
 
         Rbtn5.setOnClickListener{

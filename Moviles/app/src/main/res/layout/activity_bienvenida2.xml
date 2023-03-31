@@ -29,7 +29,6 @@
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="20dp"
         android:gravity="center"
-        android:background="@drawable/fulanito16"
         />
     <TextView
         android:id="@+id/nombreUsuario"
