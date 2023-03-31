@@ -72,7 +72,7 @@ class Introductorio : AppCompatActivity() {
 
                 supportFragmentManager.beginTransaction()
                     .replace(R.id.fragmentContainerView, elegirAvatar)
-                    .commit()
+
                 Rbtn1.setBackgroundResource(R.drawable.circulo)
                 Rbtn2.setBackgroundResource(R.drawable.circulo)
                 Rbtn3.setBackgroundResource(R.drawable.circuloseleccionado)
@@ -141,6 +141,6 @@ class Introductorio : AppCompatActivity() {
 
 }
 
-private fun FragmentTransaction.replace(fragmentContainerView: Int, elegirAvatar: elegirAvatar.Companion): FragmentTransaction {
+private fun FragmentTransaction.replace(fragmentContainerView: Int, elegirAvatar: elegirAvatar.Companion) {
 
 }

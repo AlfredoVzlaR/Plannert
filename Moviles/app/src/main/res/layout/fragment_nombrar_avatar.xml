@@ -21,7 +21,7 @@
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="20dp"
         android:gravity="center"
-        android:background="@drawable/ICONO3"/>
+        android:background="@drawable/icono3"/>
     <EditText
         android:layout_width="300dp"
         android:layout_height="50dp"
