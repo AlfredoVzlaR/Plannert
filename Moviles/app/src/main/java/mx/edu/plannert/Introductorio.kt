@@ -8,6 +8,7 @@ import android.os.Bundle
 import android.widget.LinearLayout
 import android.widget.RadioButton
 import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.FragmentTransaction
 
 class Introductorio : AppCompatActivity() {
@@ -47,31 +48,64 @@ class Introductorio : AppCompatActivity() {
                 Rbtn1.setBackgroundResource(R.drawable.circulo)
                 Rbtn4.setBackgroundResource(R.drawable.circulo)
 
-            }else if(fragment is Interes){
-                actual="plataformas"
-                val imagenes = listOf(R.drawable.pluto, R.drawable.netflix, R.drawable.primevideo,R.drawable.cuevana,
-                    R.drawable.hbo,R.drawable.diney,R.drawable.star,R.drawable.tubi,R.drawable.vix,
-                    R.drawable.appletv,R.drawable.paramount,R.drawable.hulu)
-                val interes2=Interes.newInstance(imagenes,"Plataformas")
+            }else if(fragment is Interes&& actual=="peliculas"){
+
+                    actual = "plataformas"
+                    val imagenes = listOf(
+                        R.drawable.pluto,
+                        R.drawable.netflix,
+                        R.drawable.primevideo,
+                        R.drawable.cuevana,
+                        R.drawable.hbo,
+                        R.drawable.diney,
+                        R.drawable.star,
+                        R.drawable.tubi,
+                        R.drawable.vix,
+                        R.drawable.appletv,
+                        R.drawable.paramount,
+                        R.drawable.hulu
+                    )
+                    val interes2 = Interes.newInstance(imagenes, "Plataformas")
 
 
 
-                supportFragmentManager.beginTransaction()
-                    .replace(R.id.fragmentContainerView, interes2)
-                    .commit()
-                Rbtn1.setBackgroundResource(R.drawable.circulo)
-                Rbtn2.setBackgroundResource(R.drawable.circulo)
-                Rbtn3.setBackgroundResource(R.drawable.circuloseleccionado)
-            }else if(fragment is Interes){
-                actual="elige un avatar"
-                supportFragmentManager.beginTransaction()
-                    .replace(R.id.fragmentContainerView, elegirAvatar())
-
-                Rbtn1.setBackgroundResource(R.drawable.circulo)
-                Rbtn2.setBackgroundResource(R.drawable.circulo)
-                Rbtn3.setBackgroundResource(R.drawable.circuloseleccionado)
+                    supportFragmentManager.beginTransaction()
+                        .replace(R.id.fragmentContainerView, interes2)
+                        .commit()
+                    Rbtn1.setBackgroundResource(R.drawable.circulo)
+                    Rbtn2.setBackgroundResource(R.drawable.circulo)
+                Rbtn5.setBackgroundResource(R.drawable.circulo)
                 Rbtn4.setBackgroundResource(R.drawable.circulo)
+                    Rbtn3.setBackgroundResource(R.drawable.circuloseleccionado)
+
+            }else if(fragment is Interes&& actual=="plataformas"){
+              //  Toast.makeText(this, "HOLLA", Toast.LENGTH_SHORT).show()
+                    supportFragmentManager.beginTransaction()
+                        .replace(R.id.fragmentContainerView, elegirAvatar())
+                        .commit()
+
+                    Rbtn1.setBackgroundResource(R.drawable.circulo)
+                    Rbtn2.setBackgroundResource(R.drawable.circulo)
+                    Rbtn3.setBackgroundResource(R.drawable.circulo)
+                    Rbtn5.setBackgroundResource(R.drawable.circulo)
+                    Rbtn4.setBackgroundResource(R.drawable.circuloseleccionado)
+                }else if(fragment is elegirAvatar){
+                supportFragmentManager.beginTransaction()
+                    .replace(R.id.fragmentContainerView, nombrarAvatar())
+                    .commit()
+
+                Rbtn1.setBackgroundResource(R.drawable.circulo)
+                Rbtn2.setBackgroundResource(R.drawable.circulo)
+                Rbtn3.setBackgroundResource(R.drawable.circulo)
+                Rbtn5.setBackgroundResource(R.drawable.circuloseleccionado)
+                Rbtn4.setBackgroundResource(R.drawable.circulo)
+
+            }else if(fragment is nombrarAvatar){
+                val intent = Intent(this, InicioListas::class.java)
+                startActivity(intent)
+
             }
+
             myLinearLayout.setBackgroundResource(R.drawable.fondomorado)
 
         }
@@ -101,6 +135,7 @@ class Introductorio : AppCompatActivity() {
                     .commit()
                 Rbtn1.setBackgroundResource(R.drawable.circulo)
                 Rbtn3.setBackgroundResource(R.drawable.circulo)
+            Rbtn5.setBackgroundResource(R.drawable.circulo)
             Rbtn4.setBackgroundResource(R.drawable.circulo)
 
                 Rbtn2.setBackgroundResource(R.drawable.circuloseleccionado)
@@ -123,6 +158,7 @@ class Introductorio : AppCompatActivity() {
                 Rbtn1.setBackgroundResource(R.drawable.circulo)
             Rbtn2.setBackgroundResource(R.drawable.circulo)
             Rbtn4.setBackgroundResource(R.drawable.circulo)
+            Rbtn5.setBackgroundResource(R.drawable.circulo)
                 Rbtn3.setBackgroundResource(R.drawable.circuloseleccionado)
 
             myLinearLayout.setBackgroundResource(R.drawable.fondomorado)
@@ -135,15 +171,26 @@ class Introductorio : AppCompatActivity() {
             Rbtn1.setBackgroundResource(R.drawable.circulo)
             Rbtn2.setBackgroundResource(R.drawable.circulo)
             Rbtn3.setBackgroundResource(R.drawable.circulo)
+            Rbtn5.setBackgroundResource(R.drawable.circulo)
             Rbtn4.setBackgroundResource(R.drawable.circuloseleccionado)
 
             myLinearLayout.setBackgroundResource(R.drawable.fondomorado)
         }
 
         Rbtn5.setOnClickListener{
-            val intent = Intent(this, InicioListas::class.java)
-            startActivity(intent)
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.fragmentContainerView, nombrarAvatar())
+                .commit()
+            Rbtn1.setBackgroundResource(R.drawable.circulo)
+            Rbtn2.setBackgroundResource(R.drawable.circulo)
+            Rbtn3.setBackgroundResource(R.drawable.circulo)
+            Rbtn5.setBackgroundResource(R.drawable.circuloseleccionado)
+            Rbtn4.setBackgroundResource(R.drawable.circulo)
+
+            myLinearLayout.setBackgroundResource(R.drawable.fondomorado)
+
         }
+
 
 
     }

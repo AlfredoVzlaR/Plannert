@@ -91,6 +91,76 @@ class CrearLista : AppCompatActivity() {
 
             }
 
+            btn1.setOnClickListener{
+                supportFragmentManager.beginTransaction()
+                    .replace(R.id.fragmentContainerViewCuerpo, TipoLista())
+                    .commit()
+                titulo.setText("¿De qué será tu lista?")
+                siguiente.setText("Siguiente")
+                btn2.setBackgroundResource(R.drawable.circulo)
+                btn1.setBackgroundResource(R.drawable.circuloseleccionado)
+                btn3.setBackgroundResource(R.drawable.circulo)
+                btn4.setBackgroundResource(R.drawable.circulo)
+
+            }
+
+            btn2.setOnClickListener{
+                supportFragmentManager.beginTransaction()
+                    .replace(R.id.fragmentContainerViewCuerpo, Categorias())
+                    .commit()
+                titulo.setText("Categorias")
+                siguiente.setText("Siguiente")
+                btn1.setBackgroundResource(R.drawable.circulo)
+                btn2.setBackgroundResource(R.drawable.circuloseleccionado)
+                btn3.setBackgroundResource(R.drawable.circulo)
+                btn4.setBackgroundResource(R.drawable.circulo)
+
+            }
+
+            btn3.setOnClickListener{
+                val imagenes = listOf(
+                    R.drawable.pluto,
+                    R.drawable.netflix,
+                    R.drawable.primevideo,
+                    R.drawable.cuevana,
+                    R.drawable.hbo,
+                    R.drawable.diney,
+                    R.drawable.star,
+                    R.drawable.tubi,
+                    R.drawable.vix,
+                    R.drawable.appletv,
+                    R.drawable.paramount,
+                    R.drawable.hulu
+                )
+                val titlesd = Interes.newInstance(imagenes,"Romance",true)
+                titulo.setText("Escoge los titulos de tu interés ")
+                siguiente.setText("Siguiente")
+                supportFragmentManager.beginTransaction()
+                    .replace(R.id.fragmentContainerViewCuerpo,titlesd )
+                    .commit()
+
+                btn1.setBackgroundResource(R.drawable.circulo)
+                btn2.setBackgroundResource(R.drawable.circulo)
+                btn3.setBackgroundResource(R.drawable.circuloseleccionado)
+                btn4.setBackgroundResource(R.drawable.circulo)
+
+            }
+
+            btn4.setOnClickListener{
+                supportFragmentManager.beginTransaction()
+                    .replace(R.id.fragmentContainerViewCuerpo, IdentificacionLista())
+                    .commit()
+                titulo.setText("Categorias")
+                siguiente.setText("Terminar")
+                btn2.setBackgroundResource(R.drawable.circulo)
+                btn4.setBackgroundResource(R.drawable.circuloseleccionado)
+                btn3.setBackgroundResource(R.drawable.circulo)
+                btn1.setBackgroundResource(R.drawable.circulo)
+
+            }
+
+
+
         }
     }
 }
