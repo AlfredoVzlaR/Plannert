@@ -54,7 +54,7 @@
         />
 
     <TextView
-        android:id="@+id/tvMasTarde"
+        android:id="@+id/despues"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
