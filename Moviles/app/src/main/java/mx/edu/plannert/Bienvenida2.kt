@@ -11,14 +11,14 @@ class Bienvenida2 : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_bienvenida2)
         var boton: Button =findViewById(R.id.btnCrearLista)
-        val later : TextView = findViewById(R.id.tvMasTarde)
+        val later : TextView = findViewById(R.id.despues)
 
         boton.setOnClickListener{
             val intent = Intent(this, CrearLista::class.java)
             startActivity(intent)
         }
         later.setOnClickListener{
-            val intent = Intent(this,Registro::class.java)
+            val intent = Intent(this,Inicio::class.java)
             startActivity(intent)
         }
     }
