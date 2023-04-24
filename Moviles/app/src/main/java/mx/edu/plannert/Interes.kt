@@ -131,6 +131,8 @@ class Interes : Fragment() {
                 boton4.setText("Sci -Fi")
                 boton4.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14f)
 
+
+
             }
         }
 
@@ -142,17 +144,26 @@ class Interes : Fragment() {
                 mensaje.setText("¿Qué plataformas sueles utilizar?")
             }
 
-        if(imagenes!=null) {
-             //val images = listOf(R.drawable.prodigy, R.drawable.alien, R.drawable.ironman,R.drawable.shanchi,R.drawable.quantumania,R.drawable.lightyear,R.drawable.shrek,R.drawable.elvis,R.drawable.fightclub,R.drawable.tres,R.drawable.blackswan,R.drawable.hollywood)
-           val adapter = ImageAdapter(requireContext(), imagenes as ArrayList<Contenidos>)
-            gridView.adapter = adapter
+        if(imagenes!=null ) {
+
+            //Se fija si la instancia de intere creada  tiene el paramero true de tipo busqeueda para mandar el true como parametro en el image adapter para que permite el click
+            //On listener de los elementos del gridview
+            if(busqueda==true) {
+
+                val adapter = ImageAdapter(requireContext(), imagenes as ArrayList<Contenidos>, true)
+                gridView.adapter = adapter
+            }else{
+
+                val adapter = ImageAdapter(requireContext(), imagenes as ArrayList<Contenidos>, false)
+                gridView.adapter = adapter
+            }
 
         }else{
             val imagenes2 = arrayListOf(
                 Contenidos(R.drawable.prodigy,"Título 1", "Autor 1", "Descripción 1", "Fecha 1", "Tipo 1", "Categoría 1"),
                 Contenidos(R.drawable.alien,"Título 1", "Autor 1", "Descripción 1", "Fecha 1", "Tipo 1", "Categoría 1"),
                 Contenidos(R.drawable.ironman,"Título 1", "Autor 1", "Descripción 1", "Fecha 1", "Tipo 1", "Categoría 1"),
-               Contenidos(R.drawable.shanchi,"Título 1", "Autor 1", "Descripción 1", "Fecha 1", "Tipo 1", "Categoría 1"),
+                Contenidos(R.drawable.shanchi,"Título 1", "Autor 1", "Descripción 1", "Fecha 1", "Tipo 1", "Categoría 1"),
                 Contenidos(R.drawable.quantumania,"Título 1", "Autor 1", "Descripción 1", "Fecha 1", "Tipo 1", "Categoría 1"),
                 Contenidos(R.drawable.lightyear,"Título 1", "Autor 1", "Descripción 1", "Fecha 1", "Tipo 1", "Categoría 1"),
                 Contenidos(R.drawable.shrek,"Título 1", "Autor 1", "Descripción 1", "Fecha 1", "Tipo 1", "Categoría 1"),
@@ -162,11 +173,14 @@ class Interes : Fragment() {
                 Contenidos(R.drawable.blackswan,"Título 1", "Autor 1", "Descripción 1", "Fecha 1", "Tipo 1", "Categoría 1"),
                 Contenidos(R.drawable.hollywood,"Título 1", "Autor 1", "Descripción 1", "Fecha 1", "Tipo 1", "Categoría 1"),
 
-
             )
 
-            val adapter = ImageAdapter(requireContext(), imagenes2 )
-            gridView.adapter = adapter
+            if(busqueda==true){
+                val adapter = ImageAdapter(requireContext(), imagenes as ArrayList<Contenidos>,true)
+                gridView.adapter = adapter
+            }else{
+            val adapter = ImageAdapter(requireContext(), imagenes2,false)
+            gridView.adapter = adapter}
         }
 
 
@@ -293,6 +307,19 @@ class Interes : Fragment() {
             args.putParcelableArrayList("imagenes",imagenes)
             args.putString("descripcionLista",descripcion)
             args.putString("titulo",titulo)
+            args.putBoolean("ocultarBotones",ocultarBotones)
+            fragment.arguments = args
+            return fragment
+        }
+
+        fun newInstance(imagenes: ArrayList<Contenidos>,ocultarBotones: Boolean,descripcion:String,titulo:String,busqueda:Boolean): Interes {
+            val fragment = Interes()
+            val args = Bundle()
+
+            args.putParcelableArrayList("imagenes",imagenes)
+            args.putString("descripcionLista",descripcion)
+            args.putString("titulo",titulo)
+            args.putBoolean("busqueda",busqueda)
             args.putBoolean("ocultarBotones",ocultarBotones)
             fragment.arguments = args
             return fragment

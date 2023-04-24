@@ -10,7 +10,7 @@ import android.widget.BaseAdapter
 import android.widget.EditText
 import android.widget.ImageView
 
-class ImageAdapter(private val context: Context, private val contenidos: ArrayList<Contenidos>) : BaseAdapter() {
+class ImageAdapter(private val context: Context, private val contenidos: ArrayList<Contenidos>,private val busqueda:Boolean) : BaseAdapter() {
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
         val imageView = ImageView(context)
@@ -18,29 +18,28 @@ class ImageAdapter(private val context: Context, private val contenidos: ArrayLi
         imageView.scaleType = ImageView.ScaleType.CENTER_CROP
         imageView.layoutParams = AbsListView.LayoutParams(365, 490)
 
-        // para mostrar el detalle :)
-        imageView.setOnClickListener {
-            // Obtener la actividad actual
-            val activity = context as busqueda
+
+            // para mostrar el detalle :)
+            imageView.setOnClickListener {
+                // verificica si se esta usando en busqueda para ver si se activa la funcionalidad del clickOnListener de los elementos del gridview
+                if(busqueda==true) {
+                val activity = context as busqueda
+
+
+                val detalleFragment = detalleContenido.newInstance(contenidos[position])
 
 
 
-            val detalleFragment = detalleContenido.newInstance(contenidos[position])
+                activity.supportFragmentManager.beginTransaction()
+                    .replace(R.id.fragmentContainerViewBusquedaTolbar, toolBarIcono())
+                    .commit()
+
+                activity.supportFragmentManager.beginTransaction()
+                    .replace(R.id.fragmentContainerViewElementosBusqueda, detalleFragment)
+                    .commit()
 
 
-
-            activity.supportFragmentManager.beginTransaction()
-                .replace(R.id.fragmentContainerViewBusquedaTolbar, toolBarIcono())
-                .commit()
-
-            activity.supportFragmentManager.beginTransaction()
-                .replace(R.id.fragmentContainerViewElementosBusqueda, detalleFragment)
-                .commit()
-
-
-
-
-
+            }
         }
 
         return imageView

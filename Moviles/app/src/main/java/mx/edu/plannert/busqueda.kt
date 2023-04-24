@@ -43,9 +43,11 @@ class busqueda : AppCompatActivity() {
             .commit()
 
 // :)
+
+        //Obtiene con los extra el texto "FragmentoLista" para abrir una lista ya despues falta buscar con BD
         val fragmento = intent.getStringExtra("fragmento")
         if (fragmento == "FragmentoLista") {
-            val fragment = Interes.newInstance(imagenes,true,"Titulos en la lista","Nombre de la lista")
+            val fragment = Interes.newInstance(imagenes,true,"Titulos en la lista","Nombre de la lista",true)
             supportFragmentManager.beginTransaction()
                 .replace(R.id.fragmentContainerViewElementosBusqueda, fragment)
                 .commit()
