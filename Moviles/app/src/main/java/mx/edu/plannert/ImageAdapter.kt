@@ -1,22 +1,47 @@
 package mx.edu.plannert
 
 import android.content.Context
-import android.media.Image
-import android.view.LayoutInflater
+import android.content.Intent
+import android.os.Parcelable
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AbsListView
 import android.widget.BaseAdapter
-import android.widget.GridView
+import android.widget.EditText
 import android.widget.ImageView
 
-class ImageAdapter(private val context: Context, private val images: List<Int>) : BaseAdapter() {
+class ImageAdapter(private val context: Context, private val contenidos: ArrayList<Contenidos>) : BaseAdapter() {
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
         val imageView = ImageView(context)
-        imageView.setImageResource(images[position])
+        imageView.setImageResource(contenidos[position].imagen)
         imageView.scaleType = ImageView.ScaleType.CENTER_CROP
         imageView.layoutParams = AbsListView.LayoutParams(365, 490)
+
+        // para mostrar el detalle :)
+        imageView.setOnClickListener {
+            // Obtener la actividad actual
+            val activity = context as busqueda
+
+
+
+            val detalleFragment = detalleContenido.newInstance(contenidos[position])
+
+
+
+            activity.supportFragmentManager.beginTransaction()
+                .replace(R.id.fragmentContainerViewBusquedaTolbar, toolBarIcono())
+                .commit()
+
+            activity.supportFragmentManager.beginTransaction()
+                .replace(R.id.fragmentContainerViewElementosBusqueda, detalleFragment)
+                .commit()
+
+
+
+
+
+        }
 
         return imageView
 
@@ -25,7 +50,7 @@ class ImageAdapter(private val context: Context, private val images: List<Int>) 
     }
 
     override fun getItem(position: Int): Any {
-        return images[position]
+        return contenidos.get(position)
     }
 
     override fun getItemId(position: Int): Long {
@@ -33,6 +58,10 @@ class ImageAdapter(private val context: Context, private val images: List<Int>) 
     }
 
     override fun getCount(): Int {
-        return images.size
+        return contenidos.size
     }
+
+
 }
+
+

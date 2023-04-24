@@ -27,7 +27,13 @@
         android:orientation="horizontal"
         android:gravity="center_vertical"
         android:padding="16dp">
-        <Button
+        <RadioGroup
+            android:id="@+id/radio_groupInteres"
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:layout_height="wrap_content">
+
+        <RadioButton
             android:id="@+id/btn1"
             android:layout_width="85dp"
             android:layout_height="49dp"
@@ -41,7 +47,7 @@
             android:textSize="20sp"
             android:textStyle="bold"/>
 
-        <Button
+        <RadioButton
             android:id="@+id/btn2"
             android:layout_width="85dp"
             android:layout_height="49dp"
@@ -55,7 +61,7 @@
             android:textSize="20sp"
             android:textStyle="bold"/>
 
-        <Button
+        <RadioButton
             android:id="@+id/btn3"
             android:layout_width="85dp"
             android:layout_height="49dp"
@@ -68,7 +74,7 @@
             android:textSize="20sp"
             android:textStyle="bold"/>
 
-        <Button
+        <RadioButton
             android:id="@+id/btn4"
             android:layout_width="85dp"
             android:layout_height="49dp"
@@ -81,6 +87,7 @@
             android:drawableBottom="@drawable/categoriaseries"
             android:textSize="20sp"
             android:textStyle="bold"/>
+        </RadioGroup>
 
     </LinearLayout>
 
@@ -88,7 +95,7 @@
 
 
     <TextView
-        android:id="@+id/txtSubtiulo"
+        android:id="@+id/txtSubtiuloInteres"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Peliculas"

@@ -19,6 +19,9 @@ class Introductorio : AppCompatActivity() {
 
         val siguiente: TextView=findViewById(R.id.tv_siguientePaso)
         val myLinearLayout = findViewById<LinearLayout>(R.id.layoutI)
+
+        val omitir: TextView=findViewById(R.id.textoOmitir)
+
         var fragment = supportFragmentManager.findFragmentById(R.id.fragmentContainerView)
         var Rbtn1:RadioButton=findViewById(R.id.Rbtn1)
         var Rbtn2:RadioButton=findViewById(R.id.Rbtn2)
@@ -35,7 +38,22 @@ class Introductorio : AppCompatActivity() {
             if(fragment is Bienvenida) {
                 actual="peliculas"
 
-                val imagenes = listOf(R.drawable.prodigy, R.drawable.alien, R.drawable.ironman,R.drawable.shanchi,R.drawable.quantumania,R.drawable.lightyear,R.drawable.shrek,R.drawable.elvis,R.drawable.fightclub,R.drawable.tres,R.drawable.blackswan,R.drawable.hollywood)
+                val imagenes = arrayListOf(
+                    Contenidos(R.drawable.prodigy,"Título 1", "Autor 1", "Descripción 1", "Fecha 1", "Tipo 1", "Categoría 1"),
+                    Contenidos(R.drawable.alien,"Título 1", "Autor 1", "Descripción 1", "Fecha 1", "Tipo 1", "Categoría 1"),
+                    Contenidos(R.drawable.ironman,"Título 1", "Autor 1", "Descripción 1", "Fecha 1", "Tipo 1", "Categoría 1"),
+                    Contenidos(R.drawable.shanchi,"Título 1", "Autor 1", "Descripción 1", "Fecha 1", "Tipo 1", "Categoría 1"),
+                    Contenidos(R.drawable.quantumania,"Título 1", "Autor 1", "Descripción 1", "Fecha 1", "Tipo 1", "Categoría 1"),
+                    Contenidos(R.drawable.lightyear,"Título 1", "Autor 1", "Descripción 1", "Fecha 1", "Tipo 1", "Categoría 1"),
+                    Contenidos(R.drawable.shrek,"Título 1", "Autor 1", "Descripción 1", "Fecha 1", "Tipo 1", "Categoría 1"),
+                    Contenidos(R.drawable.elvis,"Título 1", "Autor 1", "Descripción 1", "Fecha 1", "Tipo 1", "Categoría 1"),
+                    Contenidos(R.drawable.fightclub,"Título 1", "Autor 1", "Descripción 1", "Fecha 1", "Tipo 1", "Categoría 1"),
+                    Contenidos(R.drawable.tres,"Título 1", "Autor 1", "Descripción 1", "Fecha 1", "Tipo 1", "Categoría 1"),
+                    Contenidos(R.drawable.blackswan,"Título 1", "Autor 1", "Descripción 1", "Fecha 1", "Tipo 1", "Categoría 1"),
+                    Contenidos(R.drawable.hollywood,"Título 1", "Autor 1", "Descripción 1", "Fecha 1", "Tipo 1", "Categoría 1"),
+
+
+                    )
                val interes=Interes.newInstance(imagenes,"Peliculas")
 
 
@@ -51,21 +69,23 @@ class Introductorio : AppCompatActivity() {
             }else if(fragment is Interes&& actual=="peliculas"){
 
                     actual = "plataformas"
-                    val imagenes = listOf(
-                        R.drawable.pluto,
-                        R.drawable.netflix,
-                        R.drawable.primevideo,
-                        R.drawable.cuevana,
-                        R.drawable.hbo,
-                        R.drawable.diney,
-                        R.drawable.star,
-                        R.drawable.tubi,
-                        R.drawable.vix,
-                        R.drawable.appletv,
-                        R.drawable.paramount,
-                        R.drawable.hulu
+                val imagenesP = arrayListOf(
+                    Contenidos(R.drawable.pluto,"Título 1", "Autor 1", "Descripción 1", "Fecha 1", "Tipo 1", "Categoría 1"),
+                    Contenidos(R.drawable.netflix,"Título 1", "Autor 1", "Descripción 1", "Fecha 1", "Tipo 1", "Categoría 1"),
+                    Contenidos(R.drawable.primevideo,"Título 1", "Autor 1", "Descripción 1", "Fecha 1", "Tipo 1", "Categoría 1"),
+                    Contenidos(R.drawable.cuevana,"Título 1", "Autor 1", "Descripción 1", "Fecha 1", "Tipo 1", "Categoría 1"),
+                    Contenidos(R.drawable.hbo,"Título 1", "Autor 1", "Descripción 1", "Fecha 1", "Tipo 1", "Categoría 1"),
+                    Contenidos(R.drawable.diney,"Título 1", "Autor 1", "Descripción 1", "Fecha 1", "Tipo 1", "Categoría 1"),
+                    Contenidos(R.drawable.star,"Título 1", "Autor 1", "Descripción 1", "Fecha 1", "Tipo 1", "Categoría 1"),
+                    Contenidos(R.drawable.tubi,"Título 1", "Autor 1", "Descripción 1", "Fecha 1", "Tipo 1", "Categoría 1"),
+                    Contenidos(R.drawable.vix,"Título 1", "Autor 1", "Descripción 1", "Fecha 1", "Tipo 1", "Categoría 1"),
+                    Contenidos(R.drawable.appletv,"Título 1", "Autor 1", "Descripción 1", "Fecha 1", "Tipo 1", "Categoría 1"),
+                    Contenidos(R.drawable.paramount,"Título 1", "Autor 1", "Descripción 1", "Fecha 1", "Tipo 1", "Categoría 1"),
+                    Contenidos(R.drawable.hulu,"Título 1", "Autor 1", "Descripción 1", "Fecha 1", "Tipo 1", "Categoría 1"),
+
+
                     )
-                    val interes2 = Interes.newInstance(imagenes, "Plataformas")
+                    val interes2 = Interes.newInstance(imagenesP, "Plataformas")
 
 
 
@@ -128,7 +148,22 @@ class Introductorio : AppCompatActivity() {
 
         Rbtn2.setOnClickListener{
 
-                val imagenes = listOf(R.drawable.prodigy, R.drawable.alien, R.drawable.ironman,R.drawable.shanchi,R.drawable.quantumania,R.drawable.lightyear,R.drawable.shrek,R.drawable.elvis,R.drawable.fightclub,R.drawable.tres,R.drawable.blackswan,R.drawable.hollywood)
+            val imagenes = arrayListOf(
+                Contenidos(R.drawable.prodigy,"Título 1", "Autor 1", "Descripción 1", "Fecha 1", "Tipo 1", "Categoría 1"),
+                Contenidos(R.drawable.alien,"Título 1", "Autor 1", "Descripción 1", "Fecha 1", "Tipo 1", "Categoría 1"),
+                Contenidos(R.drawable.ironman,"Título 1", "Autor 1", "Descripción 1", "Fecha 1", "Tipo 1", "Categoría 1"),
+                Contenidos(R.drawable.shanchi,"Título 1", "Autor 1", "Descripción 1", "Fecha 1", "Tipo 1", "Categoría 1"),
+                Contenidos(R.drawable.quantumania,"Título 1", "Autor 1", "Descripción 1", "Fecha 1", "Tipo 1", "Categoría 1"),
+                Contenidos(R.drawable.lightyear,"Título 1", "Autor 1", "Descripción 1", "Fecha 1", "Tipo 1", "Categoría 1"),
+                Contenidos(R.drawable.shrek,"Título 1", "Autor 1", "Descripción 1", "Fecha 1", "Tipo 1", "Categoría 1"),
+                Contenidos(R.drawable.elvis,"Título 1", "Autor 1", "Descripción 1", "Fecha 1", "Tipo 1", "Categoría 1"),
+                Contenidos(R.drawable.fightclub,"Título 1", "Autor 1", "Descripción 1", "Fecha 1", "Tipo 1", "Categoría 1"),
+                Contenidos(R.drawable.tres,"Título 1", "Autor 1", "Descripción 1", "Fecha 1", "Tipo 1", "Categoría 1"),
+                Contenidos(R.drawable.blackswan,"Título 1", "Autor 1", "Descripción 1", "Fecha 1", "Tipo 1", "Categoría 1"),
+                Contenidos(R.drawable.hollywood,"Título 1", "Autor 1", "Descripción 1", "Fecha 1", "Tipo 1", "Categoría 1"),
+
+
+                )
                 val interes=Interes.newInstance(imagenes,"Peliculas")
                 supportFragmentManager.beginTransaction()
                     .replace(R.id.fragmentContainerView, interes)
@@ -148,10 +183,25 @@ class Introductorio : AppCompatActivity() {
 
         Rbtn3.setOnClickListener{
 
-                val imagenes = listOf(R.drawable.pluto, R.drawable.netflix, R.drawable.primevideo,R.drawable.cuevana,
-                    R.drawable.hbo,R.drawable.diney,R.drawable.star,R.drawable.tubi,R.drawable.vix,
-                    R.drawable.appletv,R.drawable.paramount,R.drawable.hulu)
-                val interes2=Interes.newInstance(imagenes,"Plataformas")
+
+
+            val imagenesPlataformas = arrayListOf(
+                Contenidos(R.drawable.pluto,"Título 1", "Autor 1", "Descripción 1", "Fecha 1", "Tipo 1", "Categoría 1"),
+                Contenidos(R.drawable.netflix,"Título 1", "Autor 1", "Descripción 1", "Fecha 1", "Tipo 1", "Categoría 1"),
+                Contenidos(R.drawable.primevideo,"Título 1", "Autor 1", "Descripción 1", "Fecha 1", "Tipo 1", "Categoría 1"),
+                Contenidos(R.drawable.cuevana,"Título 1", "Autor 1", "Descripción 1", "Fecha 1", "Tipo 1", "Categoría 1"),
+                Contenidos(R.drawable.hbo,"Título 1", "Autor 1", "Descripción 1", "Fecha 1", "Tipo 1", "Categoría 1"),
+                Contenidos(R.drawable.diney,"Título 1", "Autor 1", "Descripción 1", "Fecha 1", "Tipo 1", "Categoría 1"),
+                Contenidos(R.drawable.star,"Título 1", "Autor 1", "Descripción 1", "Fecha 1", "Tipo 1", "Categoría 1"),
+                Contenidos(R.drawable.tubi,"Título 1", "Autor 1", "Descripción 1", "Fecha 1", "Tipo 1", "Categoría 1"),
+                Contenidos(R.drawable.vix,"Título 1", "Autor 1", "Descripción 1", "Fecha 1", "Tipo 1", "Categoría 1"),
+                Contenidos(R.drawable.appletv,"Título 1", "Autor 1", "Descripción 1", "Fecha 1", "Tipo 1", "Categoría 1"),
+                Contenidos(R.drawable.paramount,"Título 1", "Autor 1", "Descripción 1", "Fecha 1", "Tipo 1", "Categoría 1"),
+                Contenidos(R.drawable.hulu,"Título 1", "Autor 1", "Descripción 1", "Fecha 1", "Tipo 1", "Categoría 1"),
+
+
+                )
+                val interes2=Interes.newInstance(imagenesPlataformas,"Plataformas")
                 supportFragmentManager.beginTransaction()
                     .replace(R.id.fragmentContainerView, interes2)
                     .commit()
@@ -189,6 +239,11 @@ class Introductorio : AppCompatActivity() {
 
             myLinearLayout.setBackgroundResource(R.drawable.fondomorado)
 
+        }
+
+        omitir.setOnClickListener {
+            val intent =Intent(this,InicioListas::class.java)
+            startActivity(intent)
         }
 
 

@@ -1,12 +1,13 @@
 package mx.edu.plannert
 
 import android.os.Bundle
+import android.util.TypedValue
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.GridView
+import android.widget.RadioButton
 import android.widget.TextView
 
 
@@ -25,11 +26,20 @@ class Interes : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
 
+    private  lateinit var boton1: RadioButton
+    private  lateinit var boton2: RadioButton
+    private  lateinit var boton3: RadioButton
+    private  lateinit var boton4: RadioButton
+
+    private lateinit var subtitulo: TextView
+    private lateinit var titulo: TextView
+
 
     private lateinit var gridView: GridView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
 
         arguments?.let {
             param1 = it.getString(ARG_PARAM1)
@@ -39,7 +49,10 @@ class Interes : Fragment() {
 
 
 
+
+
     }
+
 
 
 
@@ -47,52 +60,171 @@ class Interes : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        //return inflater.inflate(R.layout.fragment_interes, container, false)
-        val imagenes = arguments?.getIntegerArrayList("imagenes")
+        val view = inflater.inflate(R.layout.fragment_interes, container, false)
+
+
+        val imagenes = arguments?.getParcelableArrayList<Contenidos>("imagenes")
         val sub = arguments?.getString("subtitulo")
         val ocultar= arguments?.getBoolean("ocultar")
-      //  return inflater.inflate(R.layout.fragment_interes, container, false)
-        val view = inflater.inflate(R.layout.fragment_interes, container, false)
-        val gridView = view.findViewById<GridView>(R.id.grid_interes)
-        val subtitulo= view.findViewById<TextView>(R.id.txtSubtiulo)
-        val boton1= view.findViewById<Button>(R.id.btn1)
-        val boton2= view.findViewById<Button>(R.id.btn2)
-        val boton3= view.findViewById<Button>(R.id.btn3)
-        val boton4= view.findViewById<Button>(R.id.btn4)
-        val mensaje= view.findViewById<TextView>(R.id.txtMensaje)
+        val busqueda= arguments?.getBoolean("busqueda")
 
-        subtitulo.setText(sub)
-        if(ocultar!=null)
-        {
-            if(ocultar==true){
-                boton1.visibility=View.INVISIBLE
-                boton2.visibility=View.INVISIBLE
-                boton3.visibility=View.INVISIBLE
-                boton4.visibility=View.INVISIBLE
-                mensaje.visibility=View.INVISIBLE
+        val descripcionLista = arguments?.getString("descripcionLista")
+        val ocultarBotones= arguments?.getBoolean("ocultarBotones")
+        var title=arguments?.getString("titulo")
+
+
+
+
+
+            val gridView = view.findViewById<GridView>(R.id.grid_interes)
+            val mensaje = view.findViewById<TextView>(R.id.txtMensaje)
+        subtitulo = view.findViewById(R.id.txtSubtiuloInteres)
+        titulo=view.findViewById(R.id.txtMensaje)
+        boton1 = view.findViewById(R.id.btn1)
+        boton2 = view.findViewById(R.id.btn2)
+        boton3 = view.findViewById(R.id.btn3)
+        boton4 = view.findViewById(R.id.btn4)
+
+            subtitulo.setText(sub)
+            if (ocultar != null) {
+                if (ocultar == true) {
+                    boton1.visibility = View.INVISIBLE
+                    boton2.visibility = View.INVISIBLE
+                    boton3.visibility = View.INVISIBLE
+                    boton4.visibility = View.INVISIBLE
+                    mensaje.visibility = View.INVISIBLE
+
+                }
+            }
+
+        if(ocultarBotones==true){
+            boton1.visibility = View.INVISIBLE
+            boton2.visibility = View.INVISIBLE
+            boton3.visibility = View.INVISIBLE
+            boton4.visibility = View.INVISIBLE
+
+            subtitulo.setText(descripcionLista)
+            titulo.setText(title)
+        }
+
+        if (busqueda != null) {
+            if (busqueda == true) {
+                subtitulo.setText("Titulos populares")
+                titulo.setText("Categorias")
+                boton1.setBackgroundResource(R.drawable.opcionesmenu)
+                boton1.setCompoundDrawablesWithIntrinsicBounds(null, null, null, null)
+                boton1.setText("Terror")
+                boton1.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14f)
+
+                boton2.setBackgroundResource(R.drawable.opcionesmenurosa)
+                boton2.setCompoundDrawablesWithIntrinsicBounds(null, null, null, null)
+                boton2.setText("Romance")
+                boton2.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14f)
+
+                boton3.setBackgroundResource(R.drawable.opcionesmenuamarillo)
+                boton3.setCompoundDrawablesWithIntrinsicBounds(null, null, null, null)
+                boton3.setText("Acción")
+                boton3.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14f)
+
+                boton4.setBackgroundResource(R.drawable.opcionesmenuazul)
+                boton4.setCompoundDrawablesWithIntrinsicBounds(null, null, null, null)
+                boton4.setText("Sci -Fi")
+                boton4.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14f)
 
             }
         }
 
 
-        if(sub=="Peliculas"){
-            mensaje.setText("Selecciona 5 intereses")
-        }else if(sub=="Plataformas"){
-            mensaje.setText("¿Qué plataformas sueles utilizar?")
-        }
-       // val images = listOf(R.drawable.prodigy, R.drawable.alien, R.drawable.ironman,R.drawable.shanchi,R.drawable.quantumania,R.drawable.lightyear,R.drawable.shrek,R.drawable.elvis,R.drawable.fightclub,R.drawable.tres,R.drawable.blackswan,R.drawable.hollywood)
-        val adapter = ImageAdapter(requireContext(), imagenes as ArrayList<Int>)
-        gridView.adapter = adapter
 
-        return view
+        if (sub == "Peliculas") {
+                mensaje.setText("Selecciona 5 intereses")
+            } else if (sub == "Plataformas") {
+                mensaje.setText("¿Qué plataformas sueles utilizar?")
+            }
+
+        if(imagenes!=null) {
+             //val images = listOf(R.drawable.prodigy, R.drawable.alien, R.drawable.ironman,R.drawable.shanchi,R.drawable.quantumania,R.drawable.lightyear,R.drawable.shrek,R.drawable.elvis,R.drawable.fightclub,R.drawable.tres,R.drawable.blackswan,R.drawable.hollywood)
+           val adapter = ImageAdapter(requireContext(), imagenes as ArrayList<Contenidos>)
+            gridView.adapter = adapter
+
+        }else{
+            val imagenes2 = arrayListOf(
+                Contenidos(R.drawable.prodigy,"Título 1", "Autor 1", "Descripción 1", "Fecha 1", "Tipo 1", "Categoría 1"),
+                Contenidos(R.drawable.alien,"Título 1", "Autor 1", "Descripción 1", "Fecha 1", "Tipo 1", "Categoría 1"),
+                Contenidos(R.drawable.ironman,"Título 1", "Autor 1", "Descripción 1", "Fecha 1", "Tipo 1", "Categoría 1"),
+               Contenidos(R.drawable.shanchi,"Título 1", "Autor 1", "Descripción 1", "Fecha 1", "Tipo 1", "Categoría 1"),
+                Contenidos(R.drawable.quantumania,"Título 1", "Autor 1", "Descripción 1", "Fecha 1", "Tipo 1", "Categoría 1"),
+                Contenidos(R.drawable.lightyear,"Título 1", "Autor 1", "Descripción 1", "Fecha 1", "Tipo 1", "Categoría 1"),
+                Contenidos(R.drawable.shrek,"Título 1", "Autor 1", "Descripción 1", "Fecha 1", "Tipo 1", "Categoría 1"),
+                Contenidos(R.drawable.elvis,"Título 1", "Autor 1", "Descripción 1", "Fecha 1", "Tipo 1", "Categoría 1"),
+                Contenidos(R.drawable.fightclub,"Título 1", "Autor 1", "Descripción 1", "Fecha 1", "Tipo 1", "Categoría 1"),
+                Contenidos(R.drawable.tres,"Título 1", "Autor 1", "Descripción 1", "Fecha 1", "Tipo 1", "Categoría 1"),
+                Contenidos(R.drawable.blackswan,"Título 1", "Autor 1", "Descripción 1", "Fecha 1", "Tipo 1", "Categoría 1"),
+                Contenidos(R.drawable.hollywood,"Título 1", "Autor 1", "Descripción 1", "Fecha 1", "Tipo 1", "Categoría 1"),
+
+
+            )
+
+            val adapter = ImageAdapter(requireContext(), imagenes2 )
+            gridView.adapter = adapter
+        }
+
+
+
+
+
+
+            return view
+
+
+
     }
+
+
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         gridView = view.findViewById(R.id.grid_interes)
+        subtitulo = view.findViewById(R.id.txtSubtiuloInteres)
+        boton1 = view.findViewById(R.id.btn1)
+        boton2 = view.findViewById(R.id.btn2)
+        boton3 = view.findViewById(R.id.btn3)
+        boton4 = view.findViewById(R.id.btn4)
+
 
     }
+
+    fun setSubtitulo(subt: String) {
+
+
+        subtitulo.text=subt
+
+    }
+
+    fun setTitulo(title: String) {
+
+
+        titulo.setText(title)
+
+    }
+    fun setBackgroundABusqueda(idDrawableTeror: Int,idDrawableRomance: Int,idDrawableAccion: Int,idDrawableSciFi: Int) {
+        // Cambia el background del botón
+
+        boton1.setBackgroundResource(idDrawableTeror)
+        boton1.setText("Terror")
+        boton1.invalidate()
+        boton2.setBackgroundResource(idDrawableRomance)
+        boton2.setText("Romance")
+        boton3.setBackgroundResource(idDrawableAccion)
+        boton3.setText("Accion")
+        boton4.setBackgroundResource(idDrawableSciFi)
+        boton4.setText("Sci -Fi")
+
+    }
+
+
+
 
     companion object {
         /**
@@ -115,21 +247,53 @@ class Interes : Fragment() {
 
 
 
-        fun newInstance(imagenes: List<Int>,subtitulo:String): Interes {
+        fun newInstance(imagenes: ArrayList<Contenidos>,subtitulo:String,ocultar: Boolean): Interes {
             val fragment = Interes()
             val args = Bundle()
-            args.putIntegerArrayList("imagenes", ArrayList(imagenes))
+            args.putParcelableArrayList("imagenes",imagenes)
+            args.putString("subtitulo",subtitulo)
+            args.putBoolean("ocultar",ocultar)
+            fragment.arguments = args
+            return fragment
+        }
+
+        fun newInstance(images: ArrayList<Contenidos>,subtitulo:String): Interes {
+            val fragment = Interes()
+            val args = Bundle()
+            args.putParcelableArrayList("imagenes",images)
             args.putString("subtitulo",subtitulo)
             fragment.arguments = args
             return fragment
         }
 
-        fun newInstance(imagenes: List<Int>,subtitulo:String,ocultar: Boolean): Interes {
+
+
+        fun newInstance(imagenes: ArrayList<Contenidos>): Interes {
             val fragment = Interes()
             val args = Bundle()
-            args.putIntegerArrayList("imagenes", ArrayList(imagenes))
-            args.putString("subtitulo",subtitulo)
-            args.putBoolean("ocultar",ocultar)
+            args.putParcelableArrayList("imagenes",imagenes)
+            fragment.arguments = args
+            return fragment
+        }
+
+        fun newInstance(imagenes: ArrayList<Contenidos>,busqueda: Boolean): Interes {
+            val fragment = Interes()
+            val args = Bundle()
+
+            args.putParcelableArrayList("imagenes",imagenes)
+            args.putBoolean("busqueda",busqueda)
+            fragment.arguments = args
+            return fragment
+        }
+
+        fun newInstance(imagenes: ArrayList<Contenidos>,ocultarBotones: Boolean,descripcion:String,titulo:String): Interes {
+            val fragment = Interes()
+            val args = Bundle()
+
+            args.putParcelableArrayList("imagenes",imagenes)
+            args.putString("descripcionLista",descripcion)
+            args.putString("titulo",titulo)
+            args.putBoolean("ocultarBotones",ocultarBotones)
             fragment.arguments = args
             return fragment
         }

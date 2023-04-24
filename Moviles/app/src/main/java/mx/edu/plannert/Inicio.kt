@@ -12,10 +12,15 @@ class Inicio : AppCompatActivity() {
 
         var menu1: ImageView = findViewById(R.id.menup)
 
+
+
+
         menu1.setOnClickListener {
             val intent = Intent(this,menu::class.java)
             startActivity(intent)
         }
+
+
 
     }
 }

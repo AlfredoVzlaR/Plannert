@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,7 +7,12 @@
     android:orientation="vertical"
     android:background="@drawable/fondomenu"
     tools:context=".Inicio">
-
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:padding="16dp">
     <ImageView
         android:id="@+id/menup"
         android:layout_width="60dp"
@@ -107,110 +112,14 @@
             android:layout_marginLeft="10dp"
             android:src="@drawable/cuatro"/>
     </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center"
-        android:layout_marginRight="15dp"
-        >
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_marginLeft="25dp"
-            android:layout_gravity="center_horizontal">
-            <ImageView
-                android:layout_width="30dp"
-                android:layout_marginTop="10dp"
-                android:layout_height="30dp"
-                android:layout_gravity="center"
-                android:src="@drawable/inicio"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="INICIO"
-                android:textColor="@color/white"
-                android:fontFamily="@font/intermedium"/>
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_marginLeft="25dp"
-            android:layout_gravity="center_horizontal">
-            <ImageView
-                android:layout_width="30dp"
-                android:layout_marginTop="10dp"
-                android:layout_height="30dp"
-                android:layout_gravity="center"
-                android:src="@drawable/lista"
-               />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Mis listas"
-                android:textColor="@color/white"
-                android:fontFamily="@font/intermedium"/>
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_marginLeft="25dp"
-            android:layout_gravity="center_horizontal">
-            <ImageView
-                android:layout_width="30dp"
-                android:layout_marginTop="10dp"
-                android:layout_height="30dp"
-                android:layout_gravity="center"
-                android:src="@drawable/mas"
-                />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Añadir"
-                android:textColor="@color/white"
-                android:fontFamily="@font/intermedium"/>
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_marginLeft="25dp"
-            android:layout_gravity="center_horizontal">
-            <ImageView
-                android:layout_width="30dp"
-                android:layout_marginTop="10dp"
-                android:layout_height="30dp"
-                android:layout_gravity="center"
-                android:src="@drawable/lupa"
-                />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Buscar"
-                android:textColor="@color/white"
-                android:fontFamily="@font/intermedium"/>
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_marginLeft="25dp"
-            android:layout_gravity="center_horizontal">
-            <ImageView
-                android:layout_width="30dp"
-                android:layout_marginTop="10dp"
-                android:layout_height="30dp"
-                android:src="@drawable/descubrir"
-                android:layout_gravity="center|bottom"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Descubrir"
-                android:textColor="@color/white"
-                android:fontFamily="@font/intermedium"/>
-        </LinearLayout>
     </LinearLayout>
-</LinearLayout>
+
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/fragmentContainerViewMenuInicio"
+            android:name="mx.edu.plannert.menuInicio"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            tools:layout="@layout/fragment_menu_inicio"/>
+
+</FrameLayout>

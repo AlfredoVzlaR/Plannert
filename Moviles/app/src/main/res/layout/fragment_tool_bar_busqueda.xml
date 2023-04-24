@@ -2,14 +2,13 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="50dp"
+    android:layout_height="60dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@color/transparent"
     android:orientation="vertical"
-    tools:context=".TolBarMenu">
+    tools:context=".toolBarBusqueda">
 
     <com.google.android.material.appbar.MaterialToolbar
-        android:id="@+id/toolbar"
+        android:id="@+id/toolbarBusqueda"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="@color/transparent"
@@ -20,14 +19,20 @@
         app:contentInsetEnd="0dp"
         app:contentInsetRight="0dp"
         >
-        <TextView
-            android:id="@+id/etiquetaNavegacion"
+        <EditText
+            android:id="@+id/inputBusqueda"
+            android:layout_width="300dp"
+
+            android:layout_height="wrap_content"/>
+        <ImageView
+            android:id="@+id/botonBuscar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/white"
-            android:text=""
-            android:fontFamily="@font/intermedium" />
+            android:layout_marginTop="30dp"
 
+
+            android:src="@drawable/enter_buscar"
+            />
     </com.google.android.material.appbar.MaterialToolbar>
 
 </LinearLayout>
