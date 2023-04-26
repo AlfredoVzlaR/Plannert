@@ -12,12 +12,18 @@
         android:theme="@style/Theme.Plannert"
         tools:targetApi="31">
         <activity
+            android:name=".ListasNuevas"
+            android:exported="false" />
+        <activity
+            android:name=".MisListas"
+            android:exported="false" />
+        <activity
             android:name=".listasEmergentes"
-            android:exported="false"
-            android:theme="@style/PopupTheme"
             android:excludeFromRecents="true"
+            android:exported="false"
+            android:launchMode="singleTask"
             android:taskAffinity=""
-            android:launchMode="singleTask"/>
+            android:theme="@style/PopupTheme" />
         <activity
             android:name=".busqueda"
             android:exported="false" />
