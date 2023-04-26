@@ -14,36 +14,51 @@
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="70dp"
         android:textColor="@color/white"
-        android:text=" Número actual"
+        android:text=" Usuario actual"
         android:textSize="18sp"/>
     <EditText
         android:layout_width="350dp"
         android:layout_height="65dp"
         android:layout_gravity="center_horizontal"
         android:background="@drawable/customedittext"
-        android:hint="  6444444444"
-        android:textColorHint="@color/white"/>
+        android:hint="  Usuario actual"
+        android:textColorHint="@color/gris"/>
     <TextView
         android:layout_width="350dp"
         android:layout_height="30dp"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="30dp"
+        android:text=" Nuevo usuario"
         android:textColor="@color/white"
-        android:text=" Nuevo número"
         android:textSize="18sp"/>
     <EditText
         android:layout_width="350dp"
         android:layout_height="65dp"
         android:layout_gravity="center_horizontal"
         android:background="@drawable/customedittext"
-        android:hint="   644441141"
-        android:textColorHint="@color/white"/>
+        android:hint="   Aquí va el nuevo usuario"
+        android:textColorHint="@color/gris"/>
+    <TextView
+        android:layout_width="350dp"
+        android:layout_height="30dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="30dp"
+        android:text=" Confirmar Usuario"
+        android:textColor="@color/white"
+        android:textSize="18sp"/>
+    <EditText
+        android:layout_width="350dp"
+        android:layout_height="65dp"
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/customedittext"
+        android:hint="   Aquí va el nuevo usuario"
+        android:textColorHint="@color/gris"/>
     <Button
         android:layout_width="350dp"
         android:layout_height="65dp"
         android:layout_gravity="center"
         android:textColor="@color/white"
-        android:text="Cambiar número de teléfono"
+        android:text="Cambiar usuario"
         android:layout_marginTop="50dp"
         android:background="@drawable/custominicio"/>
 

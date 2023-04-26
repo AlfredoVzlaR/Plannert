@@ -42,6 +42,11 @@ class MenuPerfil : Fragment() {
 
 
         val boton = view.findViewById<Button>(R.id.perfilPersonal)
+        val botonUsuario = view.findViewById<Button>(R.id.perfilUsuario)
+        val botonEmail = view.findViewById<Button>(R.id.perfilCorreo)
+        val botonPassword = view.findViewById<Button>(R.id.perfiContraseña)
+        val botonCuenta = view.findViewById<Button>(R.id.perfilEliminarCuenta)
+
      //   val etiquetaTolbar=view.findViewById<TextView>(R.id.etiquetaNavegacion)
         boton.setOnClickListener {
             // Reemplaza el fragmento actual por el nuevo fragmento
@@ -53,6 +58,47 @@ class MenuPerfil : Fragment() {
             transaction.addToBackStack(null)
             transaction.commit()
         }
+        botonUsuario.setOnClickListener {
+            // Reemplaza el fragmento actual por el nuevo fragmento
+            val nuevoFragmento = MenuPerfilUsuario()
+            tolbar.actualizarTexto("Perfil / Usuario")
+
+            val transaction = requireFragmentManager().beginTransaction()
+            transaction.replace(R.id.fragmentContainerViewCuerpo, nuevoFragmento)
+            transaction.addToBackStack(null)
+            transaction.commit()
+        }
+        botonEmail.setOnClickListener {
+            // Reemplaza el fragmento actual por el nuevo fragmento
+            val nuevoFragmento = MenuPerfilEmail()
+            tolbar.actualizarTexto("Perfil / Correo")
+
+            val transaction = requireFragmentManager().beginTransaction()
+            transaction.replace(R.id.fragmentContainerViewCuerpo, nuevoFragmento)
+            transaction.addToBackStack(null)
+            transaction.commit()
+        }
+        botonPassword.setOnClickListener {
+            // Reemplaza el fragmento actual por el nuevo fragmento
+            val nuevoFragmento = MenuPerfilPassword()
+            tolbar.actualizarTexto("Perfil / Contraseña")
+
+            val transaction = requireFragmentManager().beginTransaction()
+            transaction.replace(R.id.fragmentContainerViewCuerpo, nuevoFragmento)
+            transaction.addToBackStack(null)
+            transaction.commit()
+        }
+        botonCuenta.setOnClickListener {
+            // Reemplaza el fragmento actual por el nuevo fragmento
+            val nuevoFragmento = MenuPerfilCuenta()
+            tolbar.actualizarTexto("Perfil / Eliminar cuenta")
+
+            val transaction = requireFragmentManager().beginTransaction()
+            transaction.replace(R.id.fragmentContainerViewCuerpo, nuevoFragmento)
+            transaction.addToBackStack(null)
+            transaction.commit()
+        }
+
 
         return view
     }
