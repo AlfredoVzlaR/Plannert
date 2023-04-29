@@ -1,13 +1,11 @@
 package mx.edu.plannert
 
 import android.content.Context
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Html
-import android.view.LayoutInflater
-import android.view.MenuItem
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.ImageView
 import androidx.appcompat.widget.Toolbar
 import androidx.recyclerview.widget.GridLayoutManager
@@ -17,9 +15,9 @@ class MisListas : AppCompatActivity() {
 
     lateinit var favoritas: RecyclerView
     lateinit var recientes: RecyclerView
-    lateinit var listas : RecyclerView
+    lateinit var listas: RecyclerView
     private var portadaAdapter1: PortadaAdapter? = null
-    private var portadas=ArrayList<Portada>()
+    private var portadas = ArrayList<Portada>()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -30,16 +28,15 @@ class MisListas : AppCompatActivity() {
         setSupportActionBar(toolbar)
 
         // Mostrar el botón de volver atrás en la barra de herramientas
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setDisplayShowHomeEnabled(true)
 
-        // Mostrar el botón de volver atrás en la barra de herramientas
-        getSupportActionBar()?.setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar()?.setDisplayShowHomeEnabled(true);
-
-        getSupportActionBar()?.setTitle(Html.fromHtml("<font color='#ffffff' size='5sp' font-family='@font/intermedium'>Inicio / Mis listas</font>"))
+        supportActionBar?.title =
+            Html.fromHtml("<font color='#ffffff' size='5sp' font-family='@font/intermedium'>Inicio / Mis listas</font>")
 
         // Inicializar RecyclerViews
         favoritas = findViewById(R.id.listasFavoritas)
-        recientes= findViewById(R.id.listasRecientes)
+        recientes = findViewById(R.id.listasRecientes)
         listas = findViewById(R.id.listas)
         obtenerListaPortadas()
 
@@ -53,13 +50,11 @@ class MisListas : AppCompatActivity() {
         listas.layoutManager = gridLayoutManager5
 
         // Inicializar y asignar adaptadores a los RecyclerViews
-        portadaAdapter1 = PortadaAdapter(portadas )
+        portadaAdapter1 = PortadaAdapter(portadas)
 
         favoritas.adapter = portadaAdapter1
         recientes.adapter = portadaAdapter1
         listas.adapter = portadaAdapter1
-
-
 
     }
 
@@ -77,37 +72,67 @@ class MisListas : AppCompatActivity() {
         portadas.add(Portada(R.drawable.portadalistados))
         portadas.add(Portada(R.drawable.recuadro_favoritos_conlinea))
         portadas.add(Portada(R.drawable.recuadro_favoritos_conlinea))
+        portadas.add(Portada(R.drawable.portadalistados))
         return portadas
     }
 }
 
-class PortadaAdapter(private val portadas: List<Portada>) : RecyclerView.Adapter<PortadaAdapter.PortadaViewHolder>() {
+class PortadaAdapter(private val listas: List<Portada>) : RecyclerView.Adapter<PortadaAdapter.PortadaViewHolder>() {
+
+    private lateinit var context: Context
+
+    inner class PortadaViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView), View.OnCreateContextMenuListener {
+        val imagenPortada: ImageView = itemView.findViewById(R.id.iv_portada)
+
+        init {
+            itemView.setOnCreateContextMenuListener(this)
+        }
+
+        override fun onCreateContextMenu(menu: ContextMenu?, v: View?, menuInfo: ContextMenu.ContextMenuInfo?) {
+            menu?.setHeaderTitle("Nombre de la lista")
+            val inflater = MenuInflater(context)
+            inflater.inflate(R.menu.menu_portada, menu)
+            setMenuBackground()
+            menu?.findItem(R.id.opcion_favoritos)?.setOnMenuItemClickListener {
+                // Lógica para la opción "Agregar a favoritos"
+                true
+            }
+            menu?.findItem(R.id.opcion_cambiarNombre)?.setOnMenuItemClickListener {
+                // Lógica para la opción "Cambiar el nombre"
+                true
+            }
+            menu?.findItem(R.id.opcion_eliminar)?.setOnMenuItemClickListener {
+                //Ejemplo
+                val intent = Intent(itemView.context, help::class.java)
+                itemView.context.startActivity(intent)
+                true
+            }
+        }
+
+        private fun setMenuBackground() {
+            //Sin funcionar
+           // val container = itemView.parent as View
+           // container.setBackgroundResource(R.drawable.background_menu)
+        }
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PortadaViewHolder {
-        val inflater = LayoutInflater.from(parent.context)
-        val view = inflater.inflate(R.layout.item_listas, parent, false)
-        return PortadaViewHolder(view)
+        context = parent.context
+        val itemView = LayoutInflater.from(context).inflate(R.layout.item_listas, parent, false)
+        return PortadaViewHolder(itemView)
     }
 
     override fun onBindViewHolder(holder: PortadaViewHolder, position: Int) {
-        val prod = portadas[position]
-        holder.bind(prod)
+        val lista = listas[position]
+        holder.imagenPortada.setImageResource(lista.Imagen)
     }
 
     override fun getItemCount(): Int {
-        return portadas.size
-    }
-
-    inner class PortadaViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-
-        private val imagen: ImageView = itemView.findViewById(R.id.iv_portada)
-
-        fun bind(portada: Portada) {
-            // Cargar la imagen desde el recurso local utilizando el ID del recurso
-            imagen.setImageResource(portada.Imagen)
-        }
+        return listas.size
     }
 }
+
+
 
 
 
