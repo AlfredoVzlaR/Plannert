@@ -17,6 +17,7 @@
         android:text=" Usuario actual"
         android:textSize="18sp"/>
     <EditText
+        android:id="@+id/etNombreActual"
         android:layout_width="350dp"
         android:layout_height="65dp"
         android:layout_gravity="center_horizontal"
@@ -32,6 +33,7 @@
         android:textColor="@color/white"
         android:textSize="18sp"/>
     <EditText
+        android:id="@+id/etNombreNuevo"
         android:layout_width="350dp"
         android:layout_height="65dp"
         android:layout_gravity="center_horizontal"
@@ -47,6 +49,7 @@
         android:textColor="@color/white"
         android:textSize="18sp"/>
     <EditText
+        android:id="@+id/etConfirmarNombre"
         android:layout_width="350dp"
         android:layout_height="65dp"
         android:layout_gravity="center_horizontal"
@@ -54,6 +57,7 @@
         android:hint="   Aquí va el nuevo usuario"
         android:textColorHint="@color/gris"/>
     <Button
+        android:id="@+id/buttonCambiarUsuario"
         android:layout_width="350dp"
         android:layout_height="65dp"
         android:layout_gravity="center"
