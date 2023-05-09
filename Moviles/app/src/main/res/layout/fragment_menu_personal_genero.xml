@@ -9,10 +9,12 @@
 
     <!-- TODO: Update blank fragment layout -->
     <RadioGroup
+        android:id="@+id/radioGroupGenero"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp">
         <RadioButton
+            android:id="@+id/radioButtonFemenino"
             android:layout_width="300dp"
             android:layout_height="50dp"
             android:layout_marginTop="100dp"
@@ -20,6 +22,7 @@
             android:textColor="@color/white"
             android:textSize="20sp"/>
         <RadioButton
+            android:id="@+id/radioButtonMasculino"
             android:layout_width="300dp"
             android:layout_height="50dp"
             android:layout_marginTop="20dp"
@@ -31,6 +34,7 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
             <RadioButton
+                android:id="@+id/radioButtonOtro"
                 android:layout_width="100dp"
                 android:layout_height="50dp"
                 android:layout_marginTop="20dp"
@@ -38,6 +42,7 @@
                 android:textColor="@color/white"
                 android:textSize="20sp"/>
             <EditText
+                android:id="@+id/etOtroGenero"
                 android:layout_width="250dp"
                 android:layout_height="50dp"
                 android:layout_gravity="bottom"
@@ -45,11 +50,12 @@
         </LinearLayout>
     </RadioGroup>
     <Button
+        android:id="@+id/buttonCambiarGenero"
         android:layout_width="350dp"
         android:layout_height="65dp"
         android:layout_gravity="center"
         android:textColor="@color/white"
-        android:text="Cambiar edad"
+        android:text="Cambiar genero"
         android:layout_marginTop="50dp"
         android:background="@drawable/custominicio"/>
 </LinearLayout>
