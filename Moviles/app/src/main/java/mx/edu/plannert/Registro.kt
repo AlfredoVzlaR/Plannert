@@ -36,7 +36,7 @@ class Registro : AppCompatActivity() {
 
             // Obten las instancias
             val email_txt: EditText = findViewById(R.id.txt_email)
-            val usuario_txt: EditText = findViewById(R.id.txt_usuario)
+            val nombre_txt: EditText = findViewById(R.id.txt_usuario)
             val telefono_txt: EditText = findViewById(R.id.txt_telefono)
             val contraseña_txt: EditText = findViewById(R.id.txt_contraseña)
             val txt_confirmacion : EditText = findViewById(R.id.txt_confirmar)
@@ -45,7 +45,7 @@ class Registro : AppCompatActivity() {
 
             // Obtén los valores de los campos del formulario
             val email = email_txt.text.toString()
-            val usuario = usuario_txt.text.toString()
+            val nombre = nombre_txt.text.toString()
             val telefono = telefono_txt.text.toString()
             val contraseña =contraseña_txt.text.toString()
             val genero = genero_text.text.toString()
@@ -71,7 +71,7 @@ class Registro : AppCompatActivity() {
                         // Crea un objeto con los datos del nuevo registro
                         val nuevoRegistro = HashMap<String, Any>()
                         nuevoRegistro["email"] = email
-                        nuevoRegistro["usuario"] = usuario
+                        nuevoRegistro["nombre"] = nombre
                         nuevoRegistro["telefono"] = telefono
                         nuevoRegistro["contraseña"] = contraseña
                         nuevoRegistro["genero"] = genero
