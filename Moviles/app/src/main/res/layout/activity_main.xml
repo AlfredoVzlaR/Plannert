@@ -39,7 +39,7 @@
         android:layout_marginTop="30dp"
         android:ems="10"
         android:textColorHint="@color/gris"
-        android:hint="    Con email/usuario/telefono"
+        android:hint="    Email"
         android:background="@drawable/customedittext"
         android:shadowDx="100" android:shadowDy="100" android:shadowRadius="100"
         />

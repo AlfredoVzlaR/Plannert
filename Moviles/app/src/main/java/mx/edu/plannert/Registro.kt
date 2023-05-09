@@ -39,6 +39,7 @@ class Registro : AppCompatActivity() {
             val usuario_txt: EditText = findViewById(R.id.txt_usuario)
             val telefono_txt: EditText = findViewById(R.id.txt_telefono)
             val contraseña_txt: EditText = findViewById(R.id.txt_contraseña)
+            val txt_confirmacion : EditText = findViewById(R.id.txt_confirmar)
             val genero_text: EditText = findViewById(R.id.txt_genero)
             val fecha_txt: EditText = findViewById(R.id.txt_fecha)
 
@@ -46,11 +47,16 @@ class Registro : AppCompatActivity() {
             val email = email_txt.text.toString()
             val usuario = usuario_txt.text.toString()
             val telefono = telefono_txt.text.toString()
-            val contraseña =
-                contraseña_txt.text.toString()
+            val contraseña =contraseña_txt.text.toString()
             val genero = genero_text.text.toString()
-            val fechaNacimiento =
-                fecha_txt.text.toString()
+            val fechaNacimiento = fecha_txt.text.toString()
+            val confirmarContraseña = txt_confirmacion.text.toString()
+
+            // Verifica si las contraseñas coinciden
+            if (contraseña != confirmarContraseña) {
+                Toast.makeText(this, "Las contraseñas no coinciden", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
 
             // Crea el usuario en Firebase Authentication
             auth.createUserWithEmailAndPassword(email, contraseña)

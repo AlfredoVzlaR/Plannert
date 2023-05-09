@@ -33,22 +33,26 @@ class MainActivity : AppCompatActivity() {
             val email_txt: EditText = findViewById(R.id.txt_emailInicio)
             val contraseña_txt: EditText = findViewById(R.id.txt_contraseñaInicio)
 
-            val email = email_txt.text.toString()
-            val contraseña = contraseña_txt.text.toString()
+            val email = email_txt.text.toString().trim()
+            val contraseña = contraseña_txt.text.toString().trim()
 
-            // Iniciar sesión con el usuario y la contraseña
-            auth.signInWithEmailAndPassword(email, contraseña)
-                .addOnCompleteListener(this) { task ->
-                    if (task.isSuccessful) {
-                        // El inicio de sesión fue exitoso, redirigir a la página Introductorio
-                        val intent = Intent(this, Introductorio::class.java)
-                        startActivity(intent)
-                        finish() // Evitar que el usuario regrese a la pantalla de inicio de sesión
-                    } else {
-                        // El inicio de sesión falló, mostrar mensaje de error
-                        Toast.makeText(this, "Inicio de sesión fallido", Toast.LENGTH_SHORT).show()
+            if (email.isEmpty() || contraseña.isEmpty()) {
+                Toast.makeText(this, "Por favor, ingresa tu correo electrónico y contraseña", Toast.LENGTH_SHORT).show()
+            } else {
+                // Iniciar sesión con el usuario y la contraseña
+                auth.signInWithEmailAndPassword(email, contraseña)
+                    .addOnCompleteListener(this) { task ->
+                        if (task.isSuccessful) {
+                            // El inicio de sesión fue exitoso, redirigir a la página Introductorio
+                            val intent = Intent(this, Introductorio::class.java)
+                            startActivity(intent)
+                            finish() // Evitar que el usuario regrese a la pantalla de inicio de sesión
+                        } else {
+                            // El inicio de sesión falló, mostrar mensaje de error
+                            Toast.makeText(this, "Inicio de sesión fallido", Toast.LENGTH_SHORT).show()
+                        }
                     }
-                }
+            }
         }
 
         necesitoAyuda.setOnClickListener {
