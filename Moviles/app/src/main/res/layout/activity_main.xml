@@ -31,7 +31,9 @@
         android:text="Inicia sesión"
         android:textColor="@color/white"/>
     <EditText
+        android:id="@+id/txt_emailInicio"
         android:layout_width="300dp"
+        android:inputType="textEmailAddress"
         android:layout_height="50dp"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="30dp"
@@ -42,6 +44,8 @@
         android:shadowDx="100" android:shadowDy="100" android:shadowRadius="100"
         />
     <EditText
+        android:id="@+id/txt_contraseñaInicio"
+        android:inputType="textPassword"
         android:layout_width="300dp"
         android:layout_height="50dp"
         android:layout_gravity="center_horizontal"
