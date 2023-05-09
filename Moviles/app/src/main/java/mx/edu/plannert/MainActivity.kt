@@ -49,7 +49,7 @@ class MainActivity : AppCompatActivity() {
                             finish() // Evitar que el usuario regrese a la pantalla de inicio de sesión
                         } else {
                             // El inicio de sesión falló, mostrar mensaje de error
-                            Toast.makeText(this, "Inicio de sesión fallido", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(this, "Inicio de sesión fallido, verifica la contraseña", Toast.LENGTH_SHORT).show()
                         }
                     }
             }
