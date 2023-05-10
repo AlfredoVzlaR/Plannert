@@ -15,9 +15,11 @@ import com.google.firebase.auth.FirebaseAuth
 class Inicio : AppCompatActivity() {
 
     private lateinit var client:GoogleSignInClient
+    private lateinit var auth: FirebaseAuth
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_inicio)
+
 
         var menu1: ImageView = findViewById(R.id.menup)
 
@@ -40,9 +42,10 @@ class Inicio : AppCompatActivity() {
         val cerrar: TextView = findViewById(R.id.cerrar)
 
         cerrar.setOnClickListener {
-
+            FirebaseAuth.getInstance().signOut()
             client.signOut()
-            finish()
+            val i:Intent = Intent(this,MainActivity::class.java)
+            startActivity(i)
         }
 
     }

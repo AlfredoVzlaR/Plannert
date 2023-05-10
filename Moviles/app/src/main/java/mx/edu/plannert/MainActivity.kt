@@ -12,12 +12,16 @@ import androidx.appcompat.app.AlertDialog
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.google.android.gms.common.api.Api
 import com.google.android.gms.common.api.ApiException
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
+import com.google.firebase.database.DatabaseReference
 
 class MainActivity : AppCompatActivity() {
 
+
+    private lateinit var databaseReference: DatabaseReference
 
     //private lateinit var auth: FirebaseAuth
     private lateinit var auth: FirebaseAuth
@@ -29,7 +33,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        //auth = FirebaseAuth.getInstance()
+        auth = FirebaseAuth.getInstance()
 
         val registro: TextView = findViewById(R.id.tv_registrate)
         val botonIS: Button = findViewById(R.id.btnIniciarSesion)
@@ -44,12 +48,17 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-        val options = GoogleSignInOptions.Builder().requestEmail().build()
-        client = GoogleSignIn.getClient(this,options)
-        inicioGoogle.setOnClickListener {
-            val intent = client.signInIntent
-            startActivityForResult(intent,100)
+        try{
+            val options = GoogleSignInOptions.Builder().requestEmail().build()
+            client = GoogleSignIn.getClient(this,options)
+            inicioGoogle.setOnClickListener {
+                val intent = client.signInIntent
+                startActivityForResult(intent,100)
+            }
+        }catch (e:ApiException){
+
         }
+
 
         botonIS.setOnClickListener {
 
@@ -122,22 +131,26 @@ class MainActivity : AppCompatActivity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if(requestCode==100){
+            try{
+                val task = GoogleSignIn.getSignedInAccountFromIntent(data)
+                val account = task.getResult(ApiException::class.java)
+                val credencial = GoogleAuthProvider.getCredential(account.id,null)
+                FirebaseAuth.getInstance().signInWithCredential(credencial).addOnCompleteListener{
+                    if(task.isSuccessful){
 
-            val task = GoogleSignIn.getSignedInAccountFromIntent(data)
-            val account = task.getResult(ApiException::class.java)
-            val credencial = GoogleAuthProvider.getCredential(account.id,null)
-            FirebaseAuth.getInstance().signInWithCredential(credencial).addOnCompleteListener{
-                if(task.isSuccessful){
+                        val i = Intent(this,Inicio::class.java)
+                        i.putExtra("name",FirebaseAuth.getInstance().currentUser?.displayName)
+                        startActivity(i)
 
-                    val i = Intent(this,Inicio::class.java)
-                    i.putExtra("name",FirebaseAuth.getInstance().currentUser?.email)
-                    startActivity(i)
-
-                }else{
-                    Toast.makeText(this,task.exception?.message,Toast.LENGTH_SHORT).show()
+                    }else{
+                        Toast.makeText(this,task.exception?.message,Toast.LENGTH_SHORT).show()
+                    }
                 }
+            }catch (e:ApiException){
+
             }
-        }
+            }
+
         if(requestCode==LOG_OUT){
             signOut()
         }
@@ -175,5 +188,14 @@ class MainActivity : AppCompatActivity() {
             ).show()
         }
     }
-
+    fun generarPassword(longitud: Int): String {
+        val caracteres = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
+        val random = java.security.SecureRandom()
+        val sb = StringBuilder(longitud)
+        for (i in 0 until longitud) {
+            val index = random.nextInt(caracteres.length)
+            sb.append(caracteres[index])
+        }
+        return sb.toString()
+    }
 }
