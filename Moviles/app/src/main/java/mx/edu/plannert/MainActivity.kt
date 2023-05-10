@@ -30,9 +30,34 @@ class MainActivity : AppCompatActivity() {
         }
 
         botonIS.setOnClickListener {
-            val email_txt: EditText = findViewById(R.id.txt_emailInicio)
-            val contraseña_txt: EditText = findViewById(R.id.txt_contraseñaInicio)
+            val emailET: EditText = findViewById(R.id.txt_emailInicio)
+            val pswET: EditText = findViewById(R.id.txt_contraseñaInicio)
 
+            if (emailET.text.isEmpty() || pswET.text.isEmpty()) {
+                Toast.makeText(this, "Por favor, ingresa tu correo electrónico y contraseña", Toast.LENGTH_SHORT).show()
+            } else {
+                if (emailET.text.isNotEmpty() && pswET.text.isNotEmpty()) {
+                    FirebaseAuth.getInstance().signInWithEmailAndPassword(
+                        emailET.text.toString().trim(),
+                        pswET.text.toString().trim()
+                    ).addOnCompleteListener {
+                        if (it.isSuccessful) {
+                            val intent = Intent(this, Introductorio::class.java)
+                            startActivity(intent)
+                            finish()
+                        } else {
+                            // El inicio de sesión falló, mostrar mensaje de error
+                            Toast.makeText(
+                                this,
+                                "Inicio de sesión fallido, verifica la contraseña",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        }
+                    }
+                }
+            }
+
+            /*
             val email = email_txt.text.toString().trim()
             val contraseña = contraseña_txt.text.toString().trim()
 
@@ -52,7 +77,7 @@ class MainActivity : AppCompatActivity() {
                             Toast.makeText(this, "Inicio de sesión fallido, verifica la contraseña", Toast.LENGTH_SHORT).show()
                         }
                     }
-            }
+            }*/
         }
 
         necesitoAyuda.setOnClickListener {
