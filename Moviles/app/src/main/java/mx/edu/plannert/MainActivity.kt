@@ -7,12 +7,21 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
+
 import androidx.appcompat.app.AlertDialog
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInClient
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.google.android.gms.common.api.ApiException
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.GoogleAuthProvider
 
 class MainActivity : AppCompatActivity() {
 
+
     //private lateinit var auth: FirebaseAuth
+    private lateinit var auth: FirebaseAuth
+    private lateinit var client:GoogleSignInClient
 
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(R.style.Theme_Plannert)
@@ -24,6 +33,7 @@ class MainActivity : AppCompatActivity() {
         val registro: TextView = findViewById(R.id.tv_registrate)
         val botonIS: Button = findViewById(R.id.btnIniciarSesion)
         val necesitoAyuda: TextView = findViewById(R.id.necesitoAyuda)
+        val inicioGoogle: TextView = findViewById(R.id.inicioGoogle)
 
         val emailET: EditText = findViewById(R.id.txt_emailInicio)
         val pswET: EditText = findViewById(R.id.txt_contraseñaInicio)
@@ -31,6 +41,13 @@ class MainActivity : AppCompatActivity() {
         registro.setOnClickListener {
             val intent = Intent(this, Registro::class.java)
             startActivity(intent)
+        }
+
+        val options = GoogleSignInOptions.Builder().requestEmail().build()
+        client = GoogleSignIn.getClient(this,options)
+        inicioGoogle.setOnClickListener {
+            val intent = client.signInIntent
+            startActivityForResult(intent,100)
         }
 
         botonIS.setOnClickListener {
@@ -97,6 +114,37 @@ class MainActivity : AppCompatActivity() {
         necesitoAyuda.setOnClickListener {
             val intent = Intent(this, help::class.java)
             startActivity(intent)
+        }
+
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if(requestCode==100){
+
+            val task = GoogleSignIn.getSignedInAccountFromIntent(data)
+            val account = task.getResult(ApiException::class.java)
+            val credencial = GoogleAuthProvider.getCredential(account.id,null)
+            FirebaseAuth.getInstance().signInWithCredential(credencial).addOnCompleteListener{
+                if(task.isSuccessful){
+
+                    val i = Intent(this,Inicio::class.java)
+                    i.putExtra("name",FirebaseAuth.getInstance().currentUser?.email)
+                    startActivity(i)
+
+                }else{
+                    Toast.makeText(this,task.exception?.message,Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+    }
+
+    override fun onStart() {
+        super.onStart()
+        if(FirebaseAuth.getInstance().currentUser!=null){
+            val i = Intent(this,Inicio::class.java)
+            i.putExtra("name",FirebaseAuth.getInstance().currentUser?.email)
+            startActivity(i)
         }
     }
 
