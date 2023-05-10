@@ -22,6 +22,7 @@ class MainActivity : AppCompatActivity() {
     //private lateinit var auth: FirebaseAuth
     private lateinit var auth: FirebaseAuth
     private lateinit var client:GoogleSignInClient
+    val LOG_OUT = 234
 
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(R.style.Theme_Plannert)
@@ -137,6 +138,9 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
+        if(requestCode==LOG_OUT){
+            signOut()
+        }
     }
 
     override fun onStart() {
@@ -161,4 +165,15 @@ class MainActivity : AppCompatActivity() {
         val homeIntent= Intent(this, Introductorio::class.java)
         startActivity(homeIntent)
     }
+
+    private fun signOut(){
+        client.signOut().addOnCompleteListener(this) {
+            Toast.makeText(
+                this,
+                "Sesión terminada",
+                Toast.LENGTH_SHORT
+            ).show()
+        }
+    }
+
 }

@@ -23,7 +23,7 @@
         android:inputType="phone"
         android:layout_gravity="center_horizontal"
         android:background="@drawable/customedittext"
-        android:hint="  6444444444"
+
         android:textColorHint="@color/white"/>
     <TextView
         android:layout_width="350dp"
@@ -40,7 +40,7 @@
         android:layout_height="65dp"
         android:layout_gravity="center_horizontal"
         android:background="@drawable/customedittext"
-        android:hint="   644441141"
+        android:hint="Ingresa número nuevo"
         android:textColorHint="@color/white"/>
     <Button
         android:id="@+id/buttonModificarTelefono"

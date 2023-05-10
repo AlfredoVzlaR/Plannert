@@ -57,6 +57,46 @@ class MenuPersonalNombre : Fragment() {
         }
     }
 
+    private fun obtenerUsuarioActual(callback: (Usuarios?) -> Unit) {
+        val auth: FirebaseAuth = FirebaseAuth.getInstance()
+        val currentUser = auth.currentUser
+        if (currentUser != null) {
+            val email = currentUser.email
+            consultarUsuarioPorCorreo() { usuario ->
+                callback(usuario)
+            }
+        } else {
+            callback(null)
+        }
+    }
+
+    private fun consultarUsuarioPorCorreo(callback: (Usuarios?) -> Unit) {
+        val database: FirebaseDatabase = FirebaseDatabase.getInstance()
+
+        val usuariosRef: DatabaseReference = database.getReference("usuarios")
+        val auth: FirebaseAuth = FirebaseAuth.getInstance()
+
+        val currentUser = auth.currentUser
+        if (currentUser != null) {
+            val email = currentUser.email
+            usuariosRef.orderByChild("email").equalTo(email)
+                .addListenerForSingleValueEvent(object : ValueEventListener {
+                    override fun onDataChange(dataSnapshot: DataSnapshot) {
+                        for (usuarioSnapshot in dataSnapshot.children) {
+                            val usuarioKey = usuarioSnapshot.key
+                            val usuario = usuarioSnapshot.getValue(Usuarios::class.java)
+                            callback(usuario)
+                            return
+                        }
+                        callback(null)
+                    }
+
+                    override fun onCancelled(databaseError: DatabaseError) {
+                        callback(null)
+                    }
+                })
+        }
+    }
     private fun guardarInformacionPersonal() {
         val database: FirebaseDatabase = FirebaseDatabase.getInstance()
         val usuariosRef: DatabaseReference = database.getReference("usuarios")

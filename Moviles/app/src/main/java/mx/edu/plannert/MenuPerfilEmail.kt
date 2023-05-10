@@ -43,6 +43,17 @@ class MenuPerfilEmail : Fragment() {
         val txtNuevoEmail = view.findViewById<EditText>(R.id.etNuevoEmail)
         val txtConfirmarEmail = view.findViewById<EditText>(R.id.confirmarEmail)
         val btnModificarEmail = view.findViewById<Button>(R.id.buttonCambiarEmail)
+        val database: FirebaseDatabase = FirebaseDatabase.getInstance()
+
+        val usuariosRef: DatabaseReference = database.getReference("usuarios")
+        val auth: FirebaseAuth = FirebaseAuth.getInstance()
+
+        val currentUser = auth.currentUser
+        if (currentUser != null) {
+            val email = currentUser.email
+            txtEmailActual.setText(email)
+        }
+
 
         btnModificarEmail.setOnClickListener {
             val emailActual = txtEmailActual.text.toString()

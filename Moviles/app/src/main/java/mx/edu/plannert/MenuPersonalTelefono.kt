@@ -24,6 +24,7 @@ private const val ARG_PARAM2 = "param2"
 class MenuPersonalTelefono : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
+    private lateinit var usuarioActual: Usuarios
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,6 +43,24 @@ class MenuPersonalTelefono : Fragment() {
         val txtTelefonoActual = view.findViewById<EditText>(R.id.etTelefonoActual)
         val txtTelefonoNuevo = view.findViewById<EditText>(R.id.etTelefonoNuevo)
         val btnModificarTelefono = view.findViewById<Button>(R.id.buttonModificarTelefono)
+        obtenerUsuarioActual { usuario ->
+            if (usuario != null) {
+                usuarioActual = usuario
+
+
+                val nombreUsuario = usuario.telefono ?: "Nombre de usuario desconocido"
+
+                txtTelefonoActual.setText(nombreUsuario)
+            } else {
+                // Manejar el caso en que no se encontró el usuario actual
+                Toast.makeText(
+                    requireContext(),
+                    "¡No hay usuario actual!",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+        }
+
 
         btnModificarTelefono.setOnClickListener {
             val telefonoActual = txtTelefonoActual.text.toString()
@@ -51,6 +70,47 @@ class MenuPersonalTelefono : Fragment() {
         }
 
         return view
+    }
+
+    private fun obtenerUsuarioActual(callback: (Usuarios?) -> Unit) {
+        val auth: FirebaseAuth = FirebaseAuth.getInstance()
+        val currentUser = auth.currentUser
+        if (currentUser != null) {
+            val email = currentUser.email
+            consultarUsuarioPorCorreo() { usuario ->
+                callback(usuario)
+            }
+        } else {
+            callback(null)
+        }
+    }
+
+    private fun consultarUsuarioPorCorreo(callback: (Usuarios?) -> Unit) {
+        val database: FirebaseDatabase = FirebaseDatabase.getInstance()
+
+        val usuariosRef: DatabaseReference = database.getReference("usuarios")
+        val auth: FirebaseAuth = FirebaseAuth.getInstance()
+
+        val currentUser = auth.currentUser
+        if (currentUser != null) {
+            val email = currentUser.email
+            usuariosRef.orderByChild("email").equalTo(email)
+                .addListenerForSingleValueEvent(object : ValueEventListener {
+                    override fun onDataChange(dataSnapshot: DataSnapshot) {
+                        for (usuarioSnapshot in dataSnapshot.children) {
+                            val usuarioKey = usuarioSnapshot.key
+                            val usuario = usuarioSnapshot.getValue(Usuarios::class.java)
+                            callback(usuario)
+                            return
+                        }
+                        callback(null)
+                    }
+
+                    override fun onCancelled(databaseError: DatabaseError) {
+                        callback(null)
+                    }
+                })
+        }
     }
 
     private fun modificarTelefono(telefonoActual: String, telefonoNuevo: String) {
