@@ -8,6 +8,7 @@ import android.text.Html
 import android.view.*
 import android.widget.ImageView
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.Toolbar
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -57,6 +58,9 @@ class MisListas : AppCompatActivity() {
                 // Aquí puedes hacer algo con la lista de portadas
                 // Configurar GridLayoutManager para los RecyclerViews
 
+                this@MisListas.portadas.clear()
+                this@MisListas.portadas.addAll(portadas)
+
                 // Inicializar y asignar adaptadores a los RecyclerViews
                 portadaAdapter1 = PortadaAdapter(portadas)
 
@@ -90,6 +94,11 @@ class MisListas : AppCompatActivity() {
 
         databaseReference.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
+
+                //Limpiar
+
+                portadas.clear()
+
                 // Manejar los datos obtenidos de los registros
                 for (registroSnapshot in dataSnapshot.children) {
                     // Obtener los datos del registro
@@ -102,17 +111,22 @@ class MisListas : AppCompatActivity() {
                     val usuario = registroSnapshot.child("usuario").getValue(String::class.java)
 
                     if (icono == "icono1") {
-                        portadas.add(Portada(R.drawable.portadalistados))
+                        val nombreLista = nombre ?: ""
+                        portadas.add(Portada(R.drawable.portadalistados, nombreLista))
                     }
                     if (icono == "icono2") {
-                        portadas.add(Portada(R.drawable.portadalistatres))
+                        val nombreLista = nombre ?: ""
+                        portadas.add(Portada(R.drawable.portadalistatres, nombreLista))
                     }
                     if (icono == "icono3") {
-                        portadas.add(Portada(R.drawable.portadalistauno))
+                        val nombreLista = nombre ?: ""
+                        portadas.add(Portada(R.drawable.portadalistauno, nombreLista))
                     }
                     if (icono == "icono4") {
-                        portadas.add(Portada(R.drawable.portadalistacuatro))
+                        val nombreLista = nombre ?: ""
+                        portadas.add(Portada(R.drawable.portadalistacuatro, nombreLista))
                     }
+
 
                     // Manejar los datos obtenidos del registro
                 }
@@ -134,9 +148,14 @@ class MisListas : AppCompatActivity() {
         inner class PortadaViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView),
             View.OnCreateContextMenuListener {
             val imagenPortada: ImageView = itemView.findViewById(R.id.iv_portada)
+            private var listaNombre: String = ""
 
             init {
                 itemView.setOnCreateContextMenuListener(this)
+            }
+
+            fun setListaNombre(nombre: String) {
+                listaNombre = nombre
             }
 
             override fun onCreateContextMenu(
@@ -144,7 +163,11 @@ class MisListas : AppCompatActivity() {
                 v: View?,
                 menuInfo: ContextMenu.ContextMenuInfo?
             ) {
-                menu?.setHeaderTitle("Nombre de la lista")
+                menu?.setHeaderTitle(listaNombre) // Establecer el nombre de la lista como encabezado
+                // Resto del código...
+
+                //menu?.setHeaderTitle(getListaNombre()) // Establecer el nombre de la lista como encabezado
+                //menu?.setHeaderTitle("Nombre de la lista")
                 val inflater = MenuInflater(context)
                 inflater.inflate(R.menu.menu_portada, menu)
                 setMenuBackground()
@@ -157,9 +180,42 @@ class MisListas : AppCompatActivity() {
                     true
                 }
                 menu?.findItem(R.id.opcion_eliminar)?.setOnMenuItemClickListener {
-                    //Ejemplo
-                    val intent = Intent(itemView.context, help::class.java)
-                    itemView.context.startActivity(intent)
+                    // Lógica para la opción "Eliminar"
+                    val alertDialogBuilder = AlertDialog.Builder(itemView.context)
+                    alertDialogBuilder.setTitle("Eliminar lista")
+                    alertDialogBuilder.setMessage("¿Estás seguro de que deseas eliminar esta lista?")
+                    alertDialogBuilder.setPositiveButton("Sí") { dialog, _ ->
+                        // Obtener la posición del elemento en el RecyclerView
+                        val position = adapterPosition
+
+                        // Obtener el nombre de la lista que se va a eliminar
+                        val nombreLista = listas[position].nombre
+
+                        // Eliminar el registro de la base de datos
+                        val database = FirebaseDatabase.getInstance()
+                        val databaseReference = database.getReference("listas")
+
+                        // Consultar y eliminar el registro con el nombre de la lista
+                        databaseReference.orderByChild("nombre").equalTo(nombreLista).addListenerForSingleValueEvent(object : ValueEventListener {
+                            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                                for (registroSnapshot in dataSnapshot.children) {
+                                    registroSnapshot.ref.removeValue()
+                                }
+                            }
+
+                            override fun onCancelled(error: DatabaseError) {
+                                // Manejar el error si lo hay
+                            }
+                        })
+
+                        dialog.dismiss()
+                    }
+                    alertDialogBuilder.setNegativeButton("No") { dialog, _ ->
+                        dialog.dismiss()
+                    }
+                    val alertDialog = alertDialogBuilder.create()
+                    alertDialog.show()
+
                     true
                 }
             }
@@ -180,6 +236,8 @@ class MisListas : AppCompatActivity() {
         override fun onBindViewHolder(holder: PortadaViewHolder, position: Int) {
             val lista = listas[position]
             holder.imagenPortada.setImageResource(lista.Imagen)
+            holder.setListaNombre(lista.nombre)
+
         }
 
         override fun getItemCount(): Int {
