@@ -8,6 +8,7 @@ import android.text.Html
 import android.view.*
 import android.widget.ImageView
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.Toolbar
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -57,6 +58,9 @@ class MisListas : AppCompatActivity() {
                 // Aquí puedes hacer algo con la lista de portadas
                 // Configurar GridLayoutManager para los RecyclerViews
 
+                this@MisListas.portadas.clear()
+                this@MisListas.portadas.addAll(portadas)
+
                 // Inicializar y asignar adaptadores a los RecyclerViews
                 portadaAdapter1 = PortadaAdapter(portadas)
 
@@ -90,6 +94,11 @@ class MisListas : AppCompatActivity() {
 
         databaseReference.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
+
+                //Limpiar
+
+                portadas.clear()
+
                 // Manejar los datos obtenidos de los registros
                 for (registroSnapshot in dataSnapshot.children) {
                     // Obtener los datos del registro
@@ -171,9 +180,42 @@ class MisListas : AppCompatActivity() {
                     true
                 }
                 menu?.findItem(R.id.opcion_eliminar)?.setOnMenuItemClickListener {
-                    //Ejemplo
-                    val intent = Intent(itemView.context, help::class.java)
-                    itemView.context.startActivity(intent)
+                    // Lógica para la opción "Eliminar"
+                    val alertDialogBuilder = AlertDialog.Builder(itemView.context)
+                    alertDialogBuilder.setTitle("Eliminar lista")
+                    alertDialogBuilder.setMessage("¿Estás seguro de que deseas eliminar esta lista?")
+                    alertDialogBuilder.setPositiveButton("Sí") { dialog, _ ->
+                        // Obtener la posición del elemento en el RecyclerView
+                        val position = adapterPosition
+
+                        // Obtener el nombre de la lista que se va a eliminar
+                        val nombreLista = listas[position].nombre
+
+                        // Eliminar el registro de la base de datos
+                        val database = FirebaseDatabase.getInstance()
+                        val databaseReference = database.getReference("listas")
+
+                        // Consultar y eliminar el registro con el nombre de la lista
+                        databaseReference.orderByChild("nombre").equalTo(nombreLista).addListenerForSingleValueEvent(object : ValueEventListener {
+                            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                                for (registroSnapshot in dataSnapshot.children) {
+                                    registroSnapshot.ref.removeValue()
+                                }
+                            }
+
+                            override fun onCancelled(error: DatabaseError) {
+                                // Manejar el error si lo hay
+                            }
+                        })
+
+                        dialog.dismiss()
+                    }
+                    alertDialogBuilder.setNegativeButton("No") { dialog, _ ->
+                        dialog.dismiss()
+                    }
+                    val alertDialog = alertDialogBuilder.create()
+                    alertDialog.show()
+
                     true
                 }
             }
